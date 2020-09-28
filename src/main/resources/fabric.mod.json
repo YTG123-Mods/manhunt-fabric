@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "manhunt",
+  "version": "${version}",
+  "name": "Manhunt Fabric",
+  "description": "Dream's Manhunt, built from the ground up for the Fabric Loader",
+  "authors": [
+    "YTG123"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/manhunt/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.ytg123.manhunt.Manhunt"
+    ],
+    "client": [],
+    "server": [],
+    "modmenu": [
+      "com.ytg123.manhunt.compat.ModMenuCompat"
+    ]
+  },
+  "mixins": [
+    "manhunt.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.0",
+    "fabric": "*"
+  }
+}

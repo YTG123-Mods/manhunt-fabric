@@ -1,0 +1,15 @@
+{
+  "text.autoconfig.manhunt.option.compassBehaviour": "Compass Behavior",
+  "text.autoconfig.manhunt.option.compassBehaviour.@Tooltip[0]": "Sets the behavior of the compass mechanic, can be either UPDATE or USE.",
+  "text.autoconfig.manhunt.option.compassBehaviour.@Tooltip[1]": "UPDATE = Automatically update the compass every tick",
+  "text.autoconfig.manhunt.option.compassBehaviour.@Tooltip[2]": "USE = Use the compass to update it (like Dream's manhunt).",
+
+  "text.autoconfig.manhunt.option.damageBehaviour": "Damage Behavior",
+  "text.autoconfig.manhunt.option.damageBehaviour.@Tooltip[0]": "Sets the behavior of the damage mechanic, can be either KILL or DAMAGE.",
+  "text.autoconfig.manhunt.option.damageBehaviour.@Tooltip[1]": "KILL = The speedrunner loses when they are killed (like Dream's manhunt).",
+  "text.autoconfig.manhunt.option.damageBehaviour.@Tooltip[2]": "DAMAGE = The speedrunner loses when they take damage (like dream's Assassin).",
+
+  "text.autoconfig.manhunt.option.freeze": "Freeze hunter when looked at",
+
+  "text.autoconfig.manhunt.title": "Manhunt Fabric Configuration"
+}

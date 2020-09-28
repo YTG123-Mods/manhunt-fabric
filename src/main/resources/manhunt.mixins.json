@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.ytg123.manhunt.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
