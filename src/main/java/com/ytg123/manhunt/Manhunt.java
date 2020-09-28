@@ -5,6 +5,7 @@ import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
@@ -19,6 +20,9 @@ public class Manhunt implements ModInitializer {
     public static final String MOD_NAME = "Manhunt Fabric";
     public static ManhuntConfig CONFIG;
 
+    /**
+     * Initializes the mod.
+     */
     @Override
     public void onInitialize() {
         log(Level.INFO, "Initializing");
@@ -27,10 +31,16 @@ public class Manhunt implements ModInitializer {
         log(Level.INFO, "" + CONFIG.compassBehaviour.name());
 
         ServerTickEvents.END_SERVER_TICK.register(EventListener.INSTANCE);
+
+        CommandRegistrationCallback.EVENT.register(EventListener.INSTANCE);
     }
 
+    /**
+     * Logs a message to the console.
+     * @param level The log level
+     * @param message The message being logged
+     */
     public static void log(Level level, String message){
         LOGGER.log(level, "["+MOD_NAME+"] " + message);
     }
-
 }
