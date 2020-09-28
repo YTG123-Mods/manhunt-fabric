@@ -48,7 +48,7 @@ public final class EventListener implements EndTick, CommandRegistrationCallback
                 if (hunter.inventory.getStack(i) == null || Utils.speedrunner == null) continue;
                 ItemStack stack = hunter.inventory.getStack(i);
                 if (stack.getItem().equals(Items.COMPASS)) {
-                    CompoundTag itemTag = stack.getTag().copy();
+                    CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
                     itemTag.putBoolean("LodestoneTracked", false);
                     itemTag.putString("LodestoneDimension", Utils.speedrunner.getServerWorld().getRegistryKey().getValue().toString());
                     CompoundTag lodestonePos = new CompoundTag();
@@ -56,6 +56,7 @@ public final class EventListener implements EndTick, CommandRegistrationCallback
                     lodestonePos.putInt("Y", (int) Utils.speedrunner.getY());
                     lodestonePos.putInt("Z", (int) Utils.speedrunner.getZ());
                     itemTag.put("LodestonePos", lodestonePos);
+                    stack.setTag(itemTag);
                 }
             }
         });
