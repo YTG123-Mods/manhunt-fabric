@@ -3,7 +3,8 @@
   "package": "com.ytg123.manhunt.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CompassItemMixin"
+    "CompassItemMixin",
+    "PlayerEntityMixin"
   ],
   "client": [
     "HeldItemRendererMixin"
