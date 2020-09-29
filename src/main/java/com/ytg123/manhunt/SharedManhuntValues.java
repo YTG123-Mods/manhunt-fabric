@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Various utilities for the manhunt mod.
  */
-public final class Utils {
+public final class SharedManhuntValues {
 //    public static final Map<ServerPlayerEntity, ServerPlayerEntity> compassTracking = new HashMap<>();
 
 //    /**
@@ -43,5 +43,5 @@ public final class Utils {
         speedrunner = null;
     }
 
-    private Utils() {}
+    private SharedManhuntValues() {}
 }

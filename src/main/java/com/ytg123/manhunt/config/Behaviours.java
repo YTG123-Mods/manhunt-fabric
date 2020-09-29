@@ -4,7 +4,14 @@ public final class Behaviours {
     private Behaviours() {}
 
     public enum Compass {
-        UPDATE, USE
+        /*
+         * Compass Updates automatically every tick
+         */
+        UPDATE,
+        /*
+         * Hunter has to use compass to update it
+         */
+        USE
     }
 
     public enum Damage {
