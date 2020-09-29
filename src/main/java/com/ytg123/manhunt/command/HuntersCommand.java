@@ -44,6 +44,10 @@ public class HuntersCommand {
             context.getSource().sendError(new TranslatableText("text.manhunt.command.hunters.error.speedrunner", target.getDisplayName()));
             return 1;
         }
+        if (SharedManhuntValues.hunters.contains(target)) {
+            context.getSource().sendError(new TranslatableText("text.manhunt.command.hunters.error.hunter", target.getDisplayName()));
+            return 1;
+        }
         SharedManhuntValues.hunters.add(target);
         context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.add", target.getDisplayName()), true);
         return 1;
