@@ -19,9 +19,9 @@ public class ManhuntConfig implements ConfigData {
     @Gui.Tooltip(count = 3)
     public Behaviours.Damage damageBehaviour = Behaviours.Damage.KILL;
 
-    @Comment("Freeze the hunter when looked at, similar to Dream's assassin.")
-    @Gui.Tooltip(count = 0)
-    public boolean freeze = false;
+//    @Comment("Freeze the hunter when looked at, similar to Dream's assassin.")
+//    @Gui.Tooltip(count = 0)
+//    public boolean freeze = false;
 
 //    public String[] disabledDimensions = {"minecraft:the_nether"};
 }
