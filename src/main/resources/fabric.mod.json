@@ -16,7 +16,9 @@
     "main": [
       "com.ytg123.manhunt.Manhunt"
     ],
-    "client": [],
+    "client": [
+      "com.ytg123.manhunt.ManhuntClient"
+    ],
     "server": [],
     "modmenu": [
       "com.ytg123.manhunt.compat.ModMenuCompat"

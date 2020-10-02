@@ -1,14 +1,14 @@
 package com.ytg123.manhunt;
 
 import com.ytg123.manhunt.config.ManhuntConfig;
+import com.ytg123.manhunt.init.EventListener;
+import com.ytg123.manhunt.init.ManhuntPackets;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.item.Items;
-import net.minecraft.tag.ItemTags;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,6 +33,8 @@ public class Manhunt implements ModInitializer {
         ServerTickEvents.END_SERVER_TICK.register(EventListener.INSTANCE);
 
         CommandRegistrationCallback.EVENT.register(EventListener.INSTANCE);
+
+        ManhuntPackets.registerPacketsServer();
     }
 
     /**

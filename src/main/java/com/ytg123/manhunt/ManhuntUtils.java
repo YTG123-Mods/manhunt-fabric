@@ -1,5 +1,9 @@
 package com.ytg123.manhunt;
 
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +16,7 @@ import java.util.Map;
 /**
  * Various utilities for the manhunt mod.
  */
-public final class SharedManhuntValues {
+public final class ManhuntUtils {
 //    public static final Map<ServerPlayerEntity, ServerPlayerEntity> compassTracking = new HashMap<>();
 
 //    /**
@@ -38,10 +42,16 @@ public final class SharedManhuntValues {
     public static ServerPlayerEntity speedrunner;
     public static List<ServerPlayerEntity> hunters;
 
+    public static List<PlayerEntity> haveMod = new ArrayList<>();
+
     static {
         hunters = new ArrayList<>();
         speedrunner = null;
     }
 
-    private SharedManhuntValues() {}
+    private ManhuntUtils() {}
+
+    public static boolean playerHasMod(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        return context.getSource().getEntity() != null && context.getSource().getEntity() instanceof PlayerEntity && ManhuntUtils.haveMod.contains(context.getSource().getPlayer());
+    }
 }

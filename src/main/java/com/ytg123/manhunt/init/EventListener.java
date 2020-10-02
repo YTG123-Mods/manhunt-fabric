@@ -1,6 +1,9 @@
-package com.ytg123.manhunt;
+package com.ytg123.manhunt.init;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.ytg123.manhunt.Manhunt;
+import com.ytg123.manhunt.ManhuntUtils;
+import com.ytg123.manhunt.command.ClearCacheCommand;
 import com.ytg123.manhunt.command.HuntersCommand;
 import com.ytg123.manhunt.command.SpeedrunnerCommand;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
@@ -42,18 +45,18 @@ public final class EventListener implements EndTick, CommandRegistrationCallback
 //            }
 //        });
         if (Manhunt.CONFIG.compassBehaviour.equals(Compass.UPDATE)) {
-            SharedManhuntValues.hunters.forEach(hunter -> {
+            ManhuntUtils.hunters.forEach(hunter -> {
                 for (int i = 0; i < hunter.inventory.size(); i++) {
-                    if (hunter.inventory.getStack(i) == null || SharedManhuntValues.speedrunner == null) continue;
+                    if (hunter.inventory.getStack(i) == null || ManhuntUtils.speedrunner == null) continue;
                     ItemStack stack = hunter.inventory.getStack(i);
                     if (stack.getItem().equals(Items.COMPASS)) {
                         CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
                         itemTag.putBoolean("LodestoneTracked", false);
-                        itemTag.putString("LodestoneDimension", SharedManhuntValues.speedrunner.getServerWorld().getRegistryKey().getValue().toString());
+                        itemTag.putString("LodestoneDimension", ManhuntUtils.speedrunner.getServerWorld().getRegistryKey().getValue().toString());
                         CompoundTag lodestonePos = new CompoundTag();
-                        lodestonePos.putInt("X", (int) SharedManhuntValues.speedrunner.getX());
-                        lodestonePos.putInt("Y", (int) SharedManhuntValues.speedrunner.getY());
-                        lodestonePos.putInt("Z", (int) SharedManhuntValues.speedrunner.getZ());
+                        lodestonePos.putInt("X", (int) ManhuntUtils.speedrunner.getX());
+                        lodestonePos.putInt("Y", (int) ManhuntUtils.speedrunner.getY());
+                        lodestonePos.putInt("Z", (int) ManhuntUtils.speedrunner.getZ());
                         itemTag.put("LodestonePos", lodestonePos);
                         stack.setTag(itemTag);
                     }
@@ -66,5 +69,6 @@ public final class EventListener implements EndTick, CommandRegistrationCallback
     public void register(CommandDispatcher<ServerCommandSource> commandDispatcher, boolean b) {
         SpeedrunnerCommand.register(commandDispatcher);
         HuntersCommand.register(commandDispatcher);
+        ClearCacheCommand.register(commandDispatcher);
     }
 }

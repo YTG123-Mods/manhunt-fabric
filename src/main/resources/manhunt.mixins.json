@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "CompassItemMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "PlayerManagerMixin"
   ],
   "client": [
     "HeldItemRendererMixin"

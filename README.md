@@ -8,13 +8,13 @@ This mod adds two new commands: `/speedrunner` and `/hunters`.
 ## How it works:
 If you're not familiar with Dream's Minecraft Manhunt series on Youtube, you should check that out.
 * You can set the speedrunner by using `/speedrunner <target>`. That sets that specific Player to be the speedrunner.
-* You can view who the speedrunner is by using `/speedrunner get` (*Must have mod installed in the client side*)
+* You can view who the speedrunner is by using `/speedrunner get`.
 
 <br/>
 
 * You can add hunters by using `/hunters add <target>`.
 * You can clear the hunter list by using `/hunters clear`.
-* You can get the hunter list by using `/hunters get`. (*Must have mod installed in the client side*).
+* You can get the hunter list by using `/hunters get`.
 
 ### Differences:
 * This mod uses the lodestone compass mechanic introduced in Minecraft 1.16, and it also applies the compass direction to *all* compasses in a hunter's inventory.

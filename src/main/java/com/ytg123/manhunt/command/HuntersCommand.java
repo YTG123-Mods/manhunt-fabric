@@ -3,11 +3,15 @@ package com.ytg123.manhunt.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.ytg123.manhunt.SharedManhuntValues;
+import com.ytg123.manhunt.Manhunt;
+import com.ytg123.manhunt.ManhuntUtils;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
+import sun.tools.jstat.Literal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,34 +36,62 @@ public class HuntersCommand {
         );
     }
 
-    private static int executeClear(CommandContext<ServerCommandSource> context) {
-        SharedManhuntValues.hunters.clear();
-        context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.clear"), true);
+    private static int executeClear(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        boolean playerHasMod = ManhuntUtils.playerHasMod(context);
+        ManhuntUtils.hunters.clear();
+        if (playerHasMod)
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.clear"), true);
+        else
+            context.getSource().sendFeedback(new LiteralText("Cleared hunter list!"), false);
         return 1;
     }
 
     private static int executeAdd(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity target = EntityArgumentType.getPlayer(context, "target");
-        if (target.equals(SharedManhuntValues.speedrunner)) {
-            context.getSource().sendError(new TranslatableText("text.manhunt.command.hunters.error.speedrunner", target.getDisplayName()));
+        boolean playerHasMod = ManhuntUtils.playerHasMod(context);
+
+        // Target is speedrunner
+        if (target.equals(ManhuntUtils.speedrunner)) {
+            // We check if the source is a player and the player has the mod
+            if (playerHasMod) {
+                // We send error message using TranslatableText
+                context.getSource().sendError(new TranslatableText("text.manhunt.command.hunters.error.speedrunner", target.getDisplayName()));
+
+            // Source is not player or doesn't have mod, sending error message using LiteralText
+            } else {
+                context.getSource().sendError(new LiteralText("Cannot add ").append(target.getDisplayName()).append(new LiteralText(" as a hunter because they are the speedrunner!")));
+            }
             return 1;
         }
-        if (SharedManhuntValues.hunters.contains(target)) {
-            context.getSource().sendError(new TranslatableText("text.manhunt.command.hunters.error.hunter", target.getDisplayName()));
+
+        // Check if target is already a hunter
+        if (ManhuntUtils.hunters.contains(target)) {
+            if (playerHasMod) {
+                context.getSource().sendError(new TranslatableText("text.manhunt.command.hunters.error.hunter", target.getDisplayName()));
+            } else {
+                context.getSource().sendError(new LiteralText("Cannot add ").append(target.getDisplayName()).append(new LiteralText(" as a hunter because they are already a hunter!")));
+            }
             return 1;
         }
-        SharedManhuntValues.hunters.add(target);
-        context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.add", target.getDisplayName()), true);
+        ManhuntUtils.hunters.add(target);
+        if (playerHasMod)
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.add", target.getDisplayName()), true);
+        else
+            context.getSource().sendFeedback(new LiteralText("Added ").append(target.getDisplayName()).append(new LiteralText(" to the hunters list!")), true);
         return 1;
     }
 
-    private static int executeGet(CommandContext<ServerCommandSource> context) {
-        if (SharedManhuntValues.hunters.isEmpty()) return 1;
+    private static int executeGet(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        boolean playerHasMod = ManhuntUtils.playerHasMod(context);
+        if (ManhuntUtils.hunters.isEmpty()) return 1;
         List<String> hunterNames = new ArrayList<>();
-        SharedManhuntValues.hunters.forEach(element -> {
+        ManhuntUtils.hunters.forEach(element -> {
             hunterNames.add(element.getDisplayName().asString());
         });
-        context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.get", String.join(",", hunterNames)), false);
+        if (playerHasMod)
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.get", String.join(", ", hunterNames)), false);
+        else
+            context.getSource().sendFeedback(new LiteralText("Hunters are: " + String.join(", ", hunterNames)), false);
         return 1;
     }
 }

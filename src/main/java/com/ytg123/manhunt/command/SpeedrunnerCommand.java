@@ -3,10 +3,11 @@ package com.ytg123.manhunt.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.ytg123.manhunt.SharedManhuntValues;
+import com.ytg123.manhunt.ManhuntUtils;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
 import static net.minecraft.server.command.CommandManager.*;
@@ -23,19 +24,33 @@ public class SpeedrunnerCommand {
     }
 
     private static int execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        boolean playerHasMod = ManhuntUtils.playerHasMod(context);
         ServerPlayerEntity target = EntityArgumentType.getPlayer(context, "target");
-        if (SharedManhuntValues.hunters.contains(target)) {
-            context.getSource().sendError(new TranslatableText("text.manhunt.command.speedrunner.error.hunter", target.getDisplayName()));
+
+        if (ManhuntUtils.hunters.contains(target)) {
+            if (playerHasMod)
+                context.getSource().sendError(new TranslatableText("text.manhunt.command.speedrunner.error.hunter", target.getDisplayName()));
+            else
+                context.getSource().sendError(new LiteralText("Cannot set speedrunner to ").append(target.getDisplayName()).append(new LiteralText(" because they are a hunter!")));
             return 1;
         }
-        SharedManhuntValues.speedrunner = target;
-        context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.set", SharedManhuntValues.speedrunner.getDisplayName()), true);
+
+        ManhuntUtils.speedrunner = target;
+        if (playerHasMod)
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.set", ManhuntUtils.speedrunner.getDisplayName()), true);
+        else
+            context.getSource().sendFeedback(new LiteralText("Set speedrunner to ").append(target.getDisplayName()).append(new LiteralText("!")), true);
         return 1;
     }
 
-    private static int executeGet(CommandContext<ServerCommandSource> context) {
-        if (SharedManhuntValues.speedrunner == null) return 1;
-        context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.get", SharedManhuntValues.speedrunner.getDisplayName()), false);
+    private static int executeGet(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        boolean playerHasMod = ManhuntUtils.playerHasMod(context);
+        if (ManhuntUtils.speedrunner == null) return 1;
+
+        if (playerHasMod)
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.get", ManhuntUtils.speedrunner.getDisplayName()), false);
+        else
+            context.getSource().sendFeedback(new LiteralText("Speedrunner is currently: ").append(ManhuntUtils.speedrunner.getDisplayName()), true);
         return 1;
     }
 }
