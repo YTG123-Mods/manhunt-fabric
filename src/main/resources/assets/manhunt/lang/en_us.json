@@ -13,6 +13,9 @@
 
   "text.autoconfig.manhunt.title": "Manhunt Fabric Configuration",
 
+  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters": "Force hunters to have a compass",
+  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters.@Tooltip": "Gives a compass to hunters while being added and forces it upon them.",
+
   "text.manhunt.command.speedrunner.set": "Set speedrunner to %s!",
   "text.manhunt.command.hunters.clear": "Cleared hunter list!",
   "text.manhunt.command.hunters.add": "Added %s to the hunters list!",

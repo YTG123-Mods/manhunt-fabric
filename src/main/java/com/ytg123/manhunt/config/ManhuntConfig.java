@@ -19,6 +19,10 @@ public class ManhuntConfig implements ConfigData {
     @Gui.Tooltip(count = 3)
     public Behaviours.Damage damageBehaviour = Behaviours.Damage.KILL;
 
+    @Comment("If true, gives players a compass when added to the hunters list.")
+    @Gui.Tooltip
+    public boolean giveCompassWhenSettingHunters = true;
+
 //    @Comment("Freeze the hunter when looked at, similar to Dream's assassin.")
 //    @Gui.Tooltip(count = 0)
 //    public boolean freeze = false;

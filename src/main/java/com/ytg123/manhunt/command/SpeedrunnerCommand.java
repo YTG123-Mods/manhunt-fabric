@@ -27,7 +27,7 @@ public class SpeedrunnerCommand {
         boolean playerHasMod = ManhuntUtils.playerHasMod(context);
         ServerPlayerEntity target = EntityArgumentType.getPlayer(context, "target");
 
-        if (ManhuntUtils.hunters.contains(target)) {
+        if (ManhuntUtils.hunters.contains(target.getUuid())) {
             if (playerHasMod)
                 context.getSource().sendError(new TranslatableText("text.manhunt.command.speedrunner.error.hunter", target.getDisplayName()));
             else
@@ -35,9 +35,9 @@ public class SpeedrunnerCommand {
             return 1;
         }
 
-        ManhuntUtils.speedrunner = target;
+        ManhuntUtils.speedrunner = target.getUuid();
         if (playerHasMod)
-            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.set", ManhuntUtils.speedrunner.getDisplayName()), true);
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.set", ManhuntUtils.fromCmdContext(context, ManhuntUtils.speedrunner).getDisplayName()), true);
         else
             context.getSource().sendFeedback(new LiteralText("Set speedrunner to ").append(target.getDisplayName()).append(new LiteralText("!")), true);
         return 1;
@@ -48,9 +48,9 @@ public class SpeedrunnerCommand {
         if (ManhuntUtils.speedrunner == null) return 1;
 
         if (playerHasMod)
-            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.get", ManhuntUtils.speedrunner.getDisplayName()), false);
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.get", ManhuntUtils.fromCmdContext(context, ManhuntUtils.speedrunner).getDisplayName()), false);
         else
-            context.getSource().sendFeedback(new LiteralText("Speedrunner is currently: ").append(ManhuntUtils.speedrunner.getDisplayName()), true);
+            context.getSource().sendFeedback(new LiteralText("Speedrunner is currently: ").append(ManhuntUtils.fromCmdContext(context, ManhuntUtils.speedrunner).getDisplayName()), true);
         return 1;
     }
 }

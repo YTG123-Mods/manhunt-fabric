@@ -1,17 +1,13 @@
 {
-  "required": true,
-  "package": "com.ytg123.manhunt.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "CompassItemMixin",
-    "PlayerEntityMixin",
-    "PlayerManagerMixin"
-  ],
-  "client": [
-    "HeldItemRendererMixin"
-  ],
-  "server": [],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "required": true,
+    "package": "com.ytg123.manhunt.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": ["CompassItemMixin", "PlayerEntityMixin", "PlayerInventoryMixin", "PlayerManagerMixin"],
+    "client": [
+        "HeldItemRendererMixin"
+    ],
+    "server": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }

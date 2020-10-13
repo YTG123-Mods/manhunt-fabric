@@ -9,12 +9,11 @@ import com.ytg123.manhunt.command.SpeedrunnerCommand;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 
-import static com.ytg123.manhunt.config.Behaviours.*;
-
+import static com.ytg123.manhunt.ManhuntUtils.fromServer;
+import static com.ytg123.manhunt.config.Behaviours.Compass;
 import static net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.EndTick;
 
 public final class EventListener implements EndTick, CommandRegistrationCallback {
@@ -28,41 +27,77 @@ public final class EventListener implements EndTick, CommandRegistrationCallback
     }
 
     @Override
-    public void onEndTick(MinecraftServer minecraftServer) {
-//        Utils.compassTracking.forEach((key, value) -> {
-//            for(int i = 0; i < key.inventory.size(); i++) {
-//                ItemStack stack = key.inventory.getStack(i);
-//                if (stack.getItem().equals(Items.COMPASS)) {
-//                    CompoundTag itemTag = stack.getTag().copy();
-//                    itemTag.putBoolean("LodestoneTracked", false);
-//                    itemTag.putString("LodestoneDimension", value.getServerWorld().getRegistryKey().getValue().toString());
-//                    CompoundTag lodestonePos = new CompoundTag();
-//                    lodestonePos.putInt("X", (int) value.getX());
-//                    lodestonePos.putInt("Y", (int) value.getY());
-//                    lodestonePos.putInt("Z", (int) value.getZ());
-//                    itemTag.put("LodestonePos", lodestonePos);
-//                }
-//            }
-//        });
-        if (Manhunt.CONFIG.compassBehaviour.equals(Compass.UPDATE)) {
-            ManhuntUtils.hunters.forEach(hunter -> {
-                for (int i = 0; i < hunter.inventory.size(); i++) {
-                    if (hunter.inventory.getStack(i) == null || ManhuntUtils.speedrunner == null) continue;
-                    ItemStack stack = hunter.inventory.getStack(i);
-                    if (stack.getItem().equals(Items.COMPASS)) {
-                        CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
-                        itemTag.putBoolean("LodestoneTracked", false);
-                        itemTag.putString("LodestoneDimension", ManhuntUtils.speedrunner.getServerWorld().getRegistryKey().getValue().toString());
-                        CompoundTag lodestonePos = new CompoundTag();
-                        lodestonePos.putInt("X", (int) ManhuntUtils.speedrunner.getX());
-                        lodestonePos.putInt("Y", (int) ManhuntUtils.speedrunner.getY());
-                        lodestonePos.putInt("Z", (int) ManhuntUtils.speedrunner.getZ());
-                        itemTag.put("LodestonePos", lodestonePos);
-                        stack.setTag(itemTag);
-                    }
+    public void onEndTick(MinecraftServer server) {
+        //        Utils.compassTracking.forEach((key, value) -> {
+        //            for(int i = 0; i < key.inventory.size(); i++) {
+        //                ItemStack stack = key.inventory.getStack(i);
+        //                if (stack.getItem().equals(Items.COMPASS)) {
+        //                    CompoundTag itemTag = stack.getTag().copy();
+        //                    itemTag.putBoolean("LodestoneTracked", false);
+        //                    itemTag.putString("LodestoneDimension", value.getServerWorld().getRegistryKey().getValue().toString());
+        //                    CompoundTag lodestonePos = new CompoundTag();
+        //                    lodestonePos.putInt("X", (int) value.getX());
+        //                    lodestonePos.putInt("Y", (int) value.getY());
+        //                    lodestonePos.putInt("Z", (int) value.getZ());
+        //                    itemTag.put("LodestonePos", lodestonePos);
+        //                }
+        //            }
+        //        });
+        ManhuntUtils.hunters.forEach(hunterUuid -> {
+            // Check if player is null
+            if (fromServer(server, hunterUuid) == null) {
+                return;
+            }
+
+            // Continue with logic
+            ItemStack stack = fromServer(server, hunterUuid).inventory.getStack(8);
+
+            // If the stack is empty, null or not a compass put a compass there
+            if (stack == null || stack.isEmpty() || !stack.getItem().equals(Items.COMPASS)) {
+                if (Manhunt.CONFIG.giveCompassWhenSettingHunters) {
+                    fromServer(server, hunterUuid).equip(8, new ItemStack(Items.COMPASS));
+                    stack = fromServer(server, hunterUuid).inventory.getStack(8);
+                } else if (stack == null) return;
+            }
+            if (Manhunt.CONFIG.compassBehaviour.equals(Compass.UPDATE)) {
+                // Set compass NBT
+                if (stack.getItem().equals(Items.COMPASS)) {
+                    ManhuntUtils.updateCompass(stack, fromServer(server, ManhuntUtils.speedrunner));
+                    //                    CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
+                    //                    itemTag.putBoolean("LodestoneTracked", false);
+                    //                    itemTag.putString(
+                    //                            "LodestoneDimension",
+                    //                            fromServer(server, ManhuntUtils.speedrunner).getServerWorld().getRegistryKey().getValue().toString()
+                    //                                     );
+                    //                    CompoundTag lodestonePos = new CompoundTag();
+                    //                    lodestonePos.putInt("X", (int) fromServer(server, ManhuntUtils.speedrunner).getX());
+                    //                    lodestonePos.putInt("Y", (int) fromServer(server, ManhuntUtils.speedrunner).getY());
+                    //                    lodestonePos.putInt("Z", (int) fromServer(server, ManhuntUtils.speedrunner).getZ());
+                    //                    itemTag.put("LodestonePos", lodestonePos);
+                    //                    stack.setTag(itemTag);
                 }
-            });
-        }
+
+                // Old code
+                //                for (int i = 0; i < fromServer(server, hunterUuid).inventory.size(); i++) {
+                //                    if (fromServer(server, hunterUuid).inventory.getStack(i) == null || ManhuntUtils.speedrunner == null) continue;
+                //                    ItemStack stack = fromServer(server, hunterUuid).inventory.getStack(i);
+                //                    if (stack.getItem().equals(Items.COMPASS)) {
+                //                        CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
+                //                        itemTag.putBoolean("LodestoneTracked", false);
+                //                        itemTag.putString(
+                //                                "LodestoneDimension",
+                //                                fromServer(server, ManhuntUtils.speedrunner).getServerWorld().getRegistryKey().getValue().toString()
+                //                                         );
+                //                        CompoundTag lodestonePos = new CompoundTag();
+                //                        lodestonePos.putInt("X", (int) fromServer(server, ManhuntUtils.speedrunner).getX());
+                //                        lodestonePos.putInt("Y", (int) fromServer(server, ManhuntUtils.speedrunner).getY());
+                //                        lodestonePos.putInt("Z", (int) fromServer(server, ManhuntUtils.speedrunner).getZ());
+                //                        itemTag.put("LodestonePos", lodestonePos);
+                //                        stack.setTag(itemTag);
+                //                    }
+                //                }
+            }
+        });
     }
 
     @Override

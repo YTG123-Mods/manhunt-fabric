@@ -24,11 +24,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
-    @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", at = @At(value = "TAIL"))
+    @Inject(method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z", at = @At(value = "TAIL"), cancellable = true)
     private void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!world.isClient()) {
             if (source.getAttacker() != null) {
-                if (source.getAttacker() instanceof PlayerEntity && ManhuntUtils.hunters.contains(source.getAttacker()) && Manhunt.CONFIG.damageBehaviour.equals(Damage.DAMAGE) && !isInvulnerableTo(source)) {
+                if (source.getAttacker() instanceof PlayerEntity && ManhuntUtils.hunters.contains(source.getAttacker().getUuid()) && Manhunt.CONFIG.damageBehaviour.equals(Damage.DAMAGE) && !isInvulnerableTo(source)) {
                     cir.setReturnValue(super.damage(source, Float.MAX_VALUE));
                 }
             }
