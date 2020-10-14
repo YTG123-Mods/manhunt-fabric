@@ -21,4 +21,4 @@ bin/
 run/
 
 #stupid macOS shit
-._*
+.*_*
