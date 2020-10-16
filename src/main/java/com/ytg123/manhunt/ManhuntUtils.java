@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -42,11 +43,12 @@ public final class ManhuntUtils {
     public static UUID speedrunner;
     public static List<UUID> hunters;
 
-    public static List<PlayerEntity> haveMod = new ArrayList<>();
+    public static List<PlayerEntity> haveMod;
 
     static {
         hunters = new ArrayList<>();
         speedrunner = null;
+        haveMod = new ArrayList<>();
     }
 
     private ManhuntUtils() {}
@@ -64,6 +66,10 @@ public final class ManhuntUtils {
     }
 
     public static ItemStack updateCompass(ItemStack compass, ServerPlayerEntity target) {
+        if(target == null) {
+            Manhunt.log(Level.WARN, "Compass target is null, cannot update compass! Please fix!");
+            return compass;
+        }
         CompoundTag itemTag = compass.getTag() == null ? new CompoundTag() : compass.getTag().copy();
         itemTag.putBoolean("LodestoneTracked", false);
         itemTag.putString(

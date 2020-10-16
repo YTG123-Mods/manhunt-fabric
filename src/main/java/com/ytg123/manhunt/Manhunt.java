@@ -6,7 +6,6 @@ import com.ytg123.manhunt.init.ManhuntPackets;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import org.apache.logging.log4j.Level;
@@ -14,11 +13,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Manhunt implements ModInitializer {
-    public static Logger LOGGER = LogManager.getLogger();
-
     public static final String MOD_ID = "manhunt";
     public static final String MOD_NAME = "Manhunt Fabric";
     public static ManhuntConfig CONFIG;
+
+    public static Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
     /**
      * Initializes the mod.
@@ -39,10 +38,11 @@ public class Manhunt implements ModInitializer {
 
     /**
      * Logs a message to the console.
-     * @param level The log level
+     *
+     * @param level   The log level
      * @param message The message being logged
      */
-    public static void log(Level level, String message){
-        LOGGER.log(level, "["+MOD_NAME+"] " + message);
+    public static void log(Level level, String message) {
+        LOGGER.log(level, message);
     }
 }
