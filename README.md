@@ -7,8 +7,9 @@ This mod adds two new commands: `/speedrunner` and `/hunters`.
 
 ## How it works:
 If you're not familiar with Dream's Minecraft Manhunt series on Youtube, you should check that out.
-* You can set the speedrunner by using `/speedrunner <target>`. That sets that specific Player to be the speedrunner.
+* You can set the speedrunner by using `/speedrunner set <target>`. That sets that specific Player to be the speedrunner.
 * You can view who the speedrunner is by using `/speedrunner get`.
+* You can unset the speedrunner by using `/speedrunner clear`.
 
 <br/>
 
