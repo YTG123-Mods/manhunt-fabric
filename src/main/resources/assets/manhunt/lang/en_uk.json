@@ -20,5 +20,8 @@
   "text.manhunt.command.speedrunner.get": "Speedrunner is currently: %s",
   "text.manhunt.command.speedrunner.error.hunter": "Cannot set speedrunner to %s because they are a hunter!",
   "text.manhunt.command.hunters.error.speedrunner": "Cannot add %s as a hunter because they are the speedrunner!",
-  "text.manhunt.command.hunters.error.hunter": "Cannot add %s as a hunter because they are already a hunter!"
+  "text.manhunt.command.hunters.error.hunter": "Cannot add %s as a hunter because they are already a hunter!",
+  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters": "Force hunters to have a compass",
+  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters.@Tooltip": "Gives a compass to hunters while being added and forces it upon them.",
+  "text.manhunt.command.speedrunner.clear": "Speedrunner Cleared!"
 }

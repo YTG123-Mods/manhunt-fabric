@@ -73,8 +73,14 @@ public class SpeedrunnerCommand {
         return 1;
     }
 
-    private static int executeClear(CommandContext<ServerCommandSource> context) {
+    private static int executeClear(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        boolean playerHasMod = ManhuntUtils.playerHasMod(context);
         ManhuntUtils.speedrunner = null;
+        if (playerHasMod) {
+            context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.speedrunner.clear"), true);
+        } else {
+            context.getSource().sendFeedback(new LiteralText("Speedrunner Cleared!"), true);
+        }
         return 1;
     }
 }
