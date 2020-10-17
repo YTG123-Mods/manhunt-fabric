@@ -27,7 +27,6 @@ public class Manhunt implements ModInitializer {
         log(Level.INFO, "Initializing");
         AutoConfig.register(ManhuntConfig.class, JanksonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(ManhuntConfig.class).getConfig();
-        log(Level.INFO, "" + CONFIG.compassBehaviour.name());
 
         ServerTickEvents.END_SERVER_TICK.register(EventListener.INSTANCE);
 
