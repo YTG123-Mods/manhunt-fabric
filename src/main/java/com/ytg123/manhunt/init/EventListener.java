@@ -6,7 +6,6 @@ import com.ytg123.manhunt.ManhuntUtils;
 import com.ytg123.manhunt.command.ClearCacheCommand;
 import com.ytg123.manhunt.command.HuntersCommand;
 import com.ytg123.manhunt.command.SpeedrunnerCommand;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
@@ -14,20 +13,12 @@ import net.minecraft.server.command.ServerCommandSource;
 
 import static com.ytg123.manhunt.ManhuntUtils.fromServer;
 import static com.ytg123.manhunt.config.Behaviours.Compass;
-import static net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.EndTick;
 
-public final class EventListener implements EndTick, CommandRegistrationCallback {
-    public static final EventListener INSTANCE;
-
-    static {
-        INSTANCE = new EventListener();
-    }
-
+public final class EventListener {
     private EventListener() {
     }
 
-    @Override
-    public void onEndTick(MinecraftServer server) {
+    public static void onEndTick(MinecraftServer server) {
         //        Utils.compassTracking.forEach((key, value) -> {
         //            for(int i = 0; i < key.inventory.size(); i++) {
         //                ItemStack stack = key.inventory.getStack(i);
@@ -100,8 +91,7 @@ public final class EventListener implements EndTick, CommandRegistrationCallback
         });
     }
 
-    @Override
-    public void register(CommandDispatcher<ServerCommandSource> commandDispatcher, boolean b) {
+    public static void registerCommands(CommandDispatcher<ServerCommandSource> commandDispatcher, boolean b) {
         SpeedrunnerCommand.register(commandDispatcher);
         HuntersCommand.register(commandDispatcher);
         ClearCacheCommand.register(commandDispatcher);
