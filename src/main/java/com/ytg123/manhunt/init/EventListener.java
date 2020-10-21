@@ -19,21 +19,6 @@ public final class EventListener {
     }
 
     public static void onEndTick(MinecraftServer server) {
-        //        Utils.compassTracking.forEach((key, value) -> {
-        //            for(int i = 0; i < key.inventory.size(); i++) {
-        //                ItemStack stack = key.inventory.getStack(i);
-        //                if (stack.getItem().equals(Items.COMPASS)) {
-        //                    CompoundTag itemTag = stack.getTag().copy();
-        //                    itemTag.putBoolean("LodestoneTracked", false);
-        //                    itemTag.putString("LodestoneDimension", value.getServerWorld().getRegistryKey().getValue().toString());
-        //                    CompoundTag lodestonePos = new CompoundTag();
-        //                    lodestonePos.putInt("X", (int) value.getX());
-        //                    lodestonePos.putInt("Y", (int) value.getY());
-        //                    lodestonePos.putInt("Z", (int) value.getZ());
-        //                    itemTag.put("LodestonePos", lodestonePos);
-        //                }
-        //            }
-        //        });
         ManhuntUtils.hunters.forEach(hunterUuid -> {
             // Check if player is null
             if (fromServer(server, hunterUuid) == null) {
@@ -54,39 +39,7 @@ public final class EventListener {
                 // Set compass NBT
                 if (stack.getItem().equals(Items.COMPASS)) {
                     ManhuntUtils.updateCompass(stack, fromServer(server, ManhuntUtils.speedrunner));
-                    //                    CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
-                    //                    itemTag.putBoolean("LodestoneTracked", false);
-                    //                    itemTag.putString(
-                    //                            "LodestoneDimension",
-                    //                            fromServer(server, ManhuntUtils.speedrunner).getServerWorld().getRegistryKey().getValue().toString()
-                    //                                     );
-                    //                    CompoundTag lodestonePos = new CompoundTag();
-                    //                    lodestonePos.putInt("X", (int) fromServer(server, ManhuntUtils.speedrunner).getX());
-                    //                    lodestonePos.putInt("Y", (int) fromServer(server, ManhuntUtils.speedrunner).getY());
-                    //                    lodestonePos.putInt("Z", (int) fromServer(server, ManhuntUtils.speedrunner).getZ());
-                    //                    itemTag.put("LodestonePos", lodestonePos);
-                    //                    stack.setTag(itemTag);
                 }
-
-                // Old code
-                //                for (int i = 0; i < fromServer(server, hunterUuid).inventory.size(); i++) {
-                //                    if (fromServer(server, hunterUuid).inventory.getStack(i) == null || ManhuntUtils.speedrunner == null) continue;
-                //                    ItemStack stack = fromServer(server, hunterUuid).inventory.getStack(i);
-                //                    if (stack.getItem().equals(Items.COMPASS)) {
-                //                        CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
-                //                        itemTag.putBoolean("LodestoneTracked", false);
-                //                        itemTag.putString(
-                //                                "LodestoneDimension",
-                //                                fromServer(server, ManhuntUtils.speedrunner).getServerWorld().getRegistryKey().getValue().toString()
-                //                                         );
-                //                        CompoundTag lodestonePos = new CompoundTag();
-                //                        lodestonePos.putInt("X", (int) fromServer(server, ManhuntUtils.speedrunner).getX());
-                //                        lodestonePos.putInt("Y", (int) fromServer(server, ManhuntUtils.speedrunner).getY());
-                //                        lodestonePos.putInt("Z", (int) fromServer(server, ManhuntUtils.speedrunner).getZ());
-                //                        itemTag.put("LodestonePos", lodestonePos);
-                //                        stack.setTag(itemTag);
-                //                    }
-                //                }
             }
         });
     }
