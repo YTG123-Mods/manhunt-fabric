@@ -1,6 +1,8 @@
 # Manhunt Fabric
 A mod which implements a lot of the mechanics found in Dream's (https://youtube.com/user/DreamTraps) Minecraft Manhunt plugin.
 
+***Contributions are welcome!***
+
 ## Extra Features
 It's all managed using Minecraft commands.
 This mod adds two new commands: `/speedrunner` and `/hunters`.
