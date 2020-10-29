@@ -1,8 +1,12 @@
 package com.ytg123.manhunt.config;
 
+import com.google.common.collect.Lists;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.Comment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry.Gui;
 
@@ -25,8 +29,8 @@ public class ManhuntConfig implements ConfigData {
     public boolean giveCompassWhenSettingHunters = true;
 
     @Comment("Dimensions that the compass won't work in.")
-    @Gui.Excluded
-    public String[] disabledDimensions = new String[] {"minecraft:the_nether", "minecraft:the_end"};
+    @Gui.Tooltip
+    public List<String> disabledDimensions = Lists.newArrayList("minecraft:the_nether", "minecraft:the_end");
 
     /*
      * @Comment("Freeze the hunter when looked at, similar to Dream's assassin.")

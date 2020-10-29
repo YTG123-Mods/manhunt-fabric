@@ -23,7 +23,7 @@ If you're not familiar with Dream's Minecraft Manhunt series on Youtube, you sho
 * This mod uses the lodestone compass mechanic introduced in Minecraft 1.16.
 * This mod is configurable! Yes! You can view the comments in the config itself to understand it.
 
-This mod also adds a Cloth Config screen you can open using Mod Menu (client-side only, of course). You can't configure the disabled dimensions in the Cloth Config screen because it doesn't support arrays.
+This mod also adds a Cloth Config screen you can open using Mod Menu (client-side only, of course).
 
 ## Planned Features
 * Freezing - Freezes hunters when speedrunner looks at them
