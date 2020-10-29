@@ -1,8 +1,8 @@
-package com.ytg123.manhunt;
+package io.github.ytg1234.manhunt;
 
-import com.ytg123.manhunt.config.ManhuntConfig;
-import com.ytg123.manhunt.init.EventListener;
-import com.ytg123.manhunt.init.ManhuntPackets;
+import io.github.ytg1234.manhunt.config.ManhuntConfig;
+import io.github.ytg1234.manhunt.init.EventListener;
+import io.github.ytg1234.manhunt.init.ManhuntPackets;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;

@@ -1,6 +1,6 @@
-package com.ytg123.manhunt;
+package io.github.ytg1234.manhunt;
 
-import com.ytg123.manhunt.init.ManhuntPackets;
+import io.github.ytg1234.manhunt.init.ManhuntPackets;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

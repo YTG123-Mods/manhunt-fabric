@@ -1,9 +1,9 @@
-package com.ytg123.manhunt.command;
+package io.github.ytg1234.manhunt.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.ytg123.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.ManhuntUtils;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;

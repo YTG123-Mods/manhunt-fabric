@@ -1,7 +1,7 @@
-package com.ytg123.manhunt.init;
+package io.github.ytg1234.manhunt.init;
 
-import com.ytg123.manhunt.Manhunt;
-import com.ytg123.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.Manhunt;
+import io.github.ytg1234.manhunt.ManhuntUtils;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;

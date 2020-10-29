@@ -1,4 +1,4 @@
-package com.ytg123.manhunt.mixin;
+package io.github.ytg1234.manhunt.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

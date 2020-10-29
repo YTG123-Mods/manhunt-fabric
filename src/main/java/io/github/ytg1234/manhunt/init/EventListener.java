@@ -1,18 +1,18 @@
-package com.ytg123.manhunt.init;
+package io.github.ytg1234.manhunt.init;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.ytg123.manhunt.Manhunt;
-import com.ytg123.manhunt.ManhuntUtils;
-import com.ytg123.manhunt.command.ClearCacheCommand;
-import com.ytg123.manhunt.command.HuntersCommand;
-import com.ytg123.manhunt.command.SpeedrunnerCommand;
+import io.github.ytg1234.manhunt.Manhunt;
+import io.github.ytg1234.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.command.ClearCacheCommand;
+import io.github.ytg1234.manhunt.command.HuntersCommand;
+import io.github.ytg1234.manhunt.command.SpeedrunnerCommand;
+import io.github.ytg1234.manhunt.config.Behaviours;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 
-import static com.ytg123.manhunt.ManhuntUtils.fromServer;
-import static com.ytg123.manhunt.config.Behaviours.Compass;
+import static io.github.ytg1234.manhunt.ManhuntUtils.fromServer;
 
 public final class EventListener {
     private EventListener() {
@@ -35,7 +35,7 @@ public final class EventListener {
                     stack = fromServer(server, hunterUuid).inventory.getStack(8);
                 } else if (stack == null) return;
             }
-            if (Manhunt.CONFIG.compassBehaviour.equals(Compass.UPDATE)) {
+            if (Manhunt.CONFIG.compassBehaviour.equals(Behaviours.Compass.UPDATE)) {
                 // Set compass NBT
                 if (stack.getItem().equals(Items.COMPASS)) {
                     ManhuntUtils.updateCompass(stack, fromServer(server, ManhuntUtils.speedrunner));

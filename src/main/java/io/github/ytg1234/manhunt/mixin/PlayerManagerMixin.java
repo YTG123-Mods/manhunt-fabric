@@ -1,7 +1,7 @@
-package com.ytg123.manhunt.mixin;
+package io.github.ytg1234.manhunt.mixin;
 
-import com.ytg123.manhunt.Manhunt;
-import com.ytg123.manhunt.init.ManhuntPackets;
+import io.github.ytg1234.manhunt.Manhunt;
+import io.github.ytg1234.manhunt.init.ManhuntPackets;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.network.ClientConnection;

@@ -1,7 +1,8 @@
-package com.ytg123.manhunt.mixin;
+package io.github.ytg1234.manhunt.mixin;
 
-import com.ytg123.manhunt.Manhunt;
-import com.ytg123.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.Manhunt;
+import io.github.ytg1234.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.config.Behaviours;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.CompassItem;
 import net.minecraft.item.Item;
@@ -14,8 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.Objects;
 
-import static com.ytg123.manhunt.ManhuntUtils.fromServer;
-import static com.ytg123.manhunt.config.Behaviours.Compass;
+import static io.github.ytg1234.manhunt.ManhuntUtils.fromServer;
 
 @Mixin(CompassItem.class)
 public abstract class CompassItemMixin extends Item {
@@ -25,7 +25,7 @@ public abstract class CompassItemMixin extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (user.isSneaking() && Manhunt.CONFIG.compassBehaviour.equals(Compass.USE) && ManhuntUtils.hunters.contains(user.getUuid())) {
+        if (user.isSneaking() && Manhunt.CONFIG.compassBehaviour.equals(Behaviours.Compass.USE) && ManhuntUtils.hunters.contains(user.getUuid())) {
             if (!world.isClient()) {
                 for (int i = 0; i < user.inventory.size(); i++) {
                     if (user.inventory.getStack(i) == null || ManhuntUtils.speedrunner == null) continue;

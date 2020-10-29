@@ -1,8 +1,8 @@
-package com.ytg123.manhunt.command;
+package io.github.ytg1234.manhunt.command;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.ytg123.manhunt.ManhuntUtils;
-import com.ytg123.manhunt.init.ManhuntPackets;
+import io.github.ytg1234.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.init.ManhuntPackets;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.network.PacketByteBuf;

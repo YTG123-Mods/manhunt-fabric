@@ -1,4 +1,4 @@
-package com.ytg123.manhunt.config;
+package io.github.ytg1234.manhunt.config;
 
 public final class Behaviours {
     private Behaviours() {}

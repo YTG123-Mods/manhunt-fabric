@@ -14,14 +14,14 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.ytg123.manhunt.Manhunt"
+      "io.github.ytg1234.manhunt.Manhunt"
     ],
     "client": [
-      "com.ytg123.manhunt.ManhuntClient"
+      "io.github.ytg1234.manhunt.ManhuntClient"
     ],
     "server": [],
     "modmenu": [
-      "com.ytg123.manhunt.compat.ModMenuCompat"
+      "io.github.ytg1234.manhunt.compat.ModMenuCompat"
     ]
   },
   "mixins": [

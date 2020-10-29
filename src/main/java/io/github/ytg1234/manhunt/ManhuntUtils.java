@@ -1,6 +1,5 @@
-package com.ytg123.manhunt;
+package io.github.ytg1234.manhunt;
 
-import com.google.common.collect.Lists;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,6 +1,6 @@
-package com.ytg123.manhunt.compat;
+package io.github.ytg1234.manhunt.compat;
 
-import com.ytg123.manhunt.config.ManhuntConfig;
+import io.github.ytg1234.manhunt.config.ManhuntConfig;
 import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;

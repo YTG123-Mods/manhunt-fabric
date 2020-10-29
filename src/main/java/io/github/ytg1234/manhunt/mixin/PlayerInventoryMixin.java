@@ -1,4 +1,4 @@
-package com.ytg123.manhunt.mixin;
+package io.github.ytg1234.manhunt.mixin;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

@@ -1,9 +1,8 @@
-package com.ytg123.manhunt.config;
+package io.github.ytg1234.manhunt.config;
 
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.Comment;
-import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.annotation.NonnullByDefault;
 
 import java.util.ArrayList;
 import java.util.List;

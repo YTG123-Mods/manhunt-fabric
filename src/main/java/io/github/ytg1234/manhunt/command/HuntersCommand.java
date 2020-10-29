@@ -1,10 +1,10 @@
-package com.ytg123.manhunt.command;
+package io.github.ytg1234.manhunt.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.ytg123.manhunt.Manhunt;
-import com.ytg123.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.Manhunt;
+import io.github.ytg1234.manhunt.ManhuntUtils;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -16,7 +16,7 @@ import net.minecraft.text.TranslatableText;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ytg123.manhunt.ManhuntUtils.fromCmdContext;
+import static io.github.ytg1234.manhunt.ManhuntUtils.fromCmdContext;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
