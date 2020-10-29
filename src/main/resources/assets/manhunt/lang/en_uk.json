@@ -23,5 +23,7 @@
   "text.manhunt.command.hunters.error.hunter": "Cannot add %s as a hunter because they are already a hunter!",
   "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters": "Force hunters to have a compass",
   "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters.@Tooltip": "Gives a compass to hunters while being added and forces it upon them.",
-  "text.manhunt.command.speedrunner.clear": "Speedrunner Cleared!"
+  "text.manhunt.command.speedrunner.clear": "Speedrunner Cleared!",
+  "text.autoconfig.manhunt.option.disabledDimensions": "Disabled Dimensions",
+  "text.autoconfig.manhunt.option.disabledDimensions.@Tooltip": "Dimensions the compass won't work in."
 }

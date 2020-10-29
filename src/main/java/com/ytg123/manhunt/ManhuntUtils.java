@@ -57,7 +57,7 @@ public final class ManhuntUtils {
         if (Manhunt.CONFIG.disabledDimensions.contains(target.getServerWorld().getRegistryKey().getValue().toString())) return compass;
 
         // Continue Updating
-        CompoundTag itemTag = compass.getTag() == null ? new CompoundTag() : compass.getTag().copy();
+        CompoundTag itemTag = compass.getOrCreateTag().copy();
         itemTag.putBoolean("LodestoneTracked", false);
         itemTag.putString("LodestoneDimension", target.getServerWorld().getRegistryKey().getValue().toString());
         CompoundTag lodestonePos = new CompoundTag();
