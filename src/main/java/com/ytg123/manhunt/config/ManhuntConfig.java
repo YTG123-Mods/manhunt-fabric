@@ -28,6 +28,7 @@ public class ManhuntConfig implements ConfigData {
     @Gui.Tooltip
     public boolean giveCompassWhenSettingHunters = true;
 
+    // This is a new list because auto config will try to append the values in the Json file.
     @Comment("Dimensions that the compass won't work in.")
     @Gui.Tooltip
     public List<String> disabledDimensions = new ArrayList<>();
