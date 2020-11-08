@@ -42,7 +42,6 @@ dependencies {
 	include("me.shedaniel.cloth:config-2:4.8.2")
 
 //	modRuntime("com.github.jellysquid3:sodium-fabric:mc1.16.3-0.1.0")
-	modRuntime("com.github.gnembon:fabric-carpet:master-SNAPSHOT")
 //	modRuntime("com.github.jellysquid3:lithium-fabric:mc1.16.3-0.5.6")
 //	modRuntime("com.github.jellysquid3:phosphor-fabric:mc1.16.1-v0.6.0")
 }
