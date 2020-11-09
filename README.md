@@ -1,3 +1,4 @@
+### *This repo will be removed if Dream requests so*
 # Manhunt Fabric
 A mod which implements a lot of the mechanics found in Dream's (https://youtube.com/user/DreamTraps) Minecraft Manhunt plugin.
 
