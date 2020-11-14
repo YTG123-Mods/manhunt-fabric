@@ -28,8 +28,7 @@ public class Manhunt implements ModInitializer {
         AutoConfig.register(ManhuntConfig.class, JanksonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(ManhuntConfig.class).getConfig();
 
-        ServerTickEvents.END_SERVER_TICK.register(EventListener::updateCompass);
-        ServerTickEvents.END_SERVER_TICK.register(EventListener::freezeHunters);
+        ServerTickEvents.END_SERVER_TICK.register(EventListener::onEndTick);
 
         CommandRegistrationCallback.EVENT.register(EventListener::registerCommands);
 

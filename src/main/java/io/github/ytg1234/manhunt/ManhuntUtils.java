@@ -67,8 +67,4 @@ public final class ManhuntUtils {
         compass.setTag(itemTag);
         return compass;
     }
-
-    public static void freezePlayer(PlayerEntity playerEntity) {
-        playerEntity.teleport(0.0, 70.0, 0.0);
-    }
 }
