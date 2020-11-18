@@ -7,6 +7,7 @@ import io.github.ytg1234.manhunt.command.ClearCacheCommand;
 import io.github.ytg1234.manhunt.command.HuntersCommand;
 import io.github.ytg1234.manhunt.command.SpeedrunnerCommand;
 import io.github.ytg1234.manhunt.config.Behaviours;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
@@ -18,12 +19,10 @@ public final class EventListener {
     private EventListener() {
     }
 
-    public static void onEndTick(MinecraftServer server) {
+    public static void updateCompasses(MinecraftServer server) {
         ManhuntUtils.hunters.forEach(hunterUuid -> {
             // Check if player is null
-            if (fromServer(server, hunterUuid) == null) {
-                return;
-            }
+            if (fromServer(server, hunterUuid) == null) return;
 
             // Continue with logic
             ItemStack stack = fromServer(server, hunterUuid).inventory.getStack(8);
@@ -38,10 +37,18 @@ public final class EventListener {
             if (Manhunt.CONFIG.compassBehaviour.equals(Behaviours.Compass.UPDATE)) {
                 // Set compass NBT
                 if (stack.getItem().equals(Items.COMPASS)) {
-                    ManhuntUtils.updateCompass(stack, fromServer(server, ManhuntUtils.speedrunner));
+                    fromServer(server, hunterUuid).equip(8, ManhuntUtils.updateCompass(stack, fromServer(server, ManhuntUtils.speedrunner)));
                 }
             }
         });
+    }
+
+    public static void highlightSpeedrunner(MinecraftServer server) {
+        // If speedrunner is null, bad.
+        if (fromServer(server, ManhuntUtils.speedrunner) == null) return;
+        if (Manhunt.CONFIG.highlightSpeedrunner) {
+            ManhuntUtils.applyStatusEffectToPlayer(fromServer(server, ManhuntUtils.speedrunner), StatusEffects.GLOWING);
+        }
     }
 
     public static void registerCommands(CommandDispatcher<ServerCommandSource> commandDispatcher, boolean b) {

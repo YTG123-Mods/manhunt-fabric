@@ -25,5 +25,7 @@
   "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters.@Tooltip": "Gives a compass to hunters while being added and forces it upon them.",
   "text.manhunt.command.speedrunner.clear": "Speedrunner Cleared!",
   "text.autoconfig.manhunt.option.disabledDimensions": "Disabled Dimensions",
-  "text.autoconfig.manhunt.option.disabledDimensions.@Tooltip": "Dimensions the compass won't work in."
+  "text.autoconfig.manhunt.option.disabledDimensions.@Tooltip": "Dimensions the compass won't work in.",
+  "text.autoconfig.manhunt.option.highlightSpeedrunner": "Highlight Speedrunner",
+  "text.autoconfig.manhunt.option.highlightSpeedrunner.@Tooltip": "Weather to apply the glowing effect to the speedrunner, similar to Dream's Survivalist"
 }

@@ -14,6 +14,9 @@
   "text.autoconfig.manhunt.option.disabledDimensions": "Disabled Dimensions",
   "text.autoconfig.manhunt.option.disabledDimensions.@Tooltip": "Dimensions the compass won't work in.",
 
+  "text.autoconfig.manhunt.option.highlightSpeedrunner": "Highlight Speedrunner",
+  "text.autoconfig.manhunt.option.highlightSpeedrunner.@Tooltip": "Weather to apply the glowing effect to the speedrunner, similar to Dream's Survivalist",
+
   "text.autoconfig.manhunt.title": "Manhunt Fabric Configuration",
 
   "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters": "Force hunters to have a compass",
