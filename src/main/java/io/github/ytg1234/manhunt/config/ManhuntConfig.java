@@ -32,8 +32,7 @@ public class ManhuntConfig implements ConfigData {
     @Gui.Tooltip
     public List<String> disabledDimensions = new ArrayList<>();
 
-    /*
-     * @Comment("Freeze the hunter when looked at, similar to Dream's assassin.")
-     * @Gui.Tooltip(count = 0)
-     * public boolean freeze = false; */
+    @Comment("Weather to apply the glowing effect to the speedrunner, similar to Dream's Survivalist")
+    @Gui.Tooltip
+    public boolean highlightSpeedrunner = false;
 }

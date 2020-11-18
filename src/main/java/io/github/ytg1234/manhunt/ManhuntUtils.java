@@ -2,6 +2,9 @@ package io.github.ytg1234.manhunt;
 
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import io.github.ytg1234.manhunt.api.event.CompassUpdateCallback;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -50,13 +53,15 @@ public final class ManhuntUtils {
         // Is target null?
         if (target == null) {
             Manhunt.log(Level.WARN, "Compass target is null, cannot update compass! Please fix!");
-            return compass;
+            return compass.copy();
         }
         // Is dimension disabled?
-        if (Manhunt.CONFIG.disabledDimensions.contains(target.getServerWorld().getRegistryKey().getValue().toString())) return compass;
+        if (Manhunt.CONFIG.disabledDimensions.contains(target.getServerWorld().getRegistryKey().getValue().toString())) return compass.copy();
 
         // Continue Updating
-        CompoundTag itemTag = compass.getOrCreateTag().copy();
+        ItemStack oldCompass = compass.copy();
+        ItemStack newCompass = compass.copy();
+        CompoundTag itemTag = newCompass.getOrCreateTag().copy();
         itemTag.putBoolean("LodestoneTracked", false);
         itemTag.putString("LodestoneDimension", target.getServerWorld().getRegistryKey().getValue().toString());
         CompoundTag lodestonePos = new CompoundTag();
@@ -64,7 +69,12 @@ public final class ManhuntUtils {
         lodestonePos.putInt("Y", (int) target.getY());
         lodestonePos.putInt("Z", (int) target.getZ());
         itemTag.put("LodestonePos", lodestonePos);
-        compass.setTag(itemTag);
-        return compass;
+        newCompass.setTag(itemTag);
+        newCompass = CompassUpdateCallback.EVENT.invoker().onCompassUpdate(oldCompass, newCompass);
+        return newCompass;
+    }
+
+    public static void applyStatusEffectToPlayer(PlayerEntity player, StatusEffect effect) {
+        player.applyStatusEffect(new StatusEffectInstance(effect, 2));
     }
 }
