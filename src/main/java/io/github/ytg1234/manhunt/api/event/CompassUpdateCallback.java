@@ -42,7 +42,6 @@ public interface CompassUpdateCallback {
      * Returning a stack different than the {@code newStack} parameter changes the event behaviour.
      * </p>
      *
-     * @param hunter   The hunter whose compass is being updated.
      * @param oldStack The old, non-updated compass or another {@link ItemStack}.
      * @param newStack The new, updated compass {@link ItemStack}. This stack is updated by the Manhunt mod or by another listener.
      *
