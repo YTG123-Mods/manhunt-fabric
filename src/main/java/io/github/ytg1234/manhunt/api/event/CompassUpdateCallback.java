@@ -18,11 +18,16 @@ import net.minecraft.item.ItemStack;
  * <p>
  * The final return value is the updated hunter compass.
  * </p>
+ *
+ * @author YTG1234
+ * @since 0.6
  */
 @FunctionalInterface
 public interface CompassUpdateCallback {
     /**
      * Called when a hunter's compass updates.
+     *
+     * @since 0.6
      */
     Event<CompassUpdateCallback> EVENT = EventFactory.createArrayBacked(CompassUpdateCallback.class, listeners -> (oldStack, newStack) -> {
         ItemStack currentStack = newStack.copy();
@@ -46,6 +51,8 @@ public interface CompassUpdateCallback {
      * @param newStack The new, updated compass {@link ItemStack}. This stack is updated by the Manhunt mod or by another listener.
      *
      * @return The new, updated compass {@link ItemStack}.
+     *
+     * @since 0.6
      */
     ItemStack onCompassUpdate(ItemStack oldStack, ItemStack newStack);
 }
