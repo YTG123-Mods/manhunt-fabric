@@ -43,10 +43,6 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 	include("me.shedaniel.cloth:config-2:4.8.2")
-
-//	modRuntime("com.github.jellysquid3:sodium-fabric:mc1.16.3-0.1.0")
-//	modRuntime("com.github.jellysquid3:lithium-fabric:mc1.16.3-0.5.6")
-//	modRuntime("com.github.jellysquid3:phosphor-fabric:mc1.16.1-v0.6.0")
 }
 
 processResources {
@@ -118,11 +114,5 @@ publishing {
         maven {
             url = "file://${projectDir}/repo"
         }
-//        mavenDeployer {
-//            repository(url: "file://localhost${projectDir}/repo")
-//            pom.version = project.mod_version
-//            pom.artifactId = project.archives_base_name
-//            pom.groupId = project.maven_group
-//        }
 	}
 }
