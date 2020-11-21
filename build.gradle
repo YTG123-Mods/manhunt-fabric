@@ -115,5 +115,14 @@ publishing {
 	repositories {
 		// uncomment to publish to the local maven
 		// mavenLocal()
+        maven {
+            url = "file://${projectDir}/repo"
+        }
+//        mavenDeployer {
+//            repository(url: "file://localhost${projectDir}/repo")
+//            pom.version = project.mod_version
+//            pom.artifactId = project.archives_base_name
+//            pom.groupId = project.maven_group
+//        }
 	}
 }
