@@ -111,10 +111,5 @@ publishing {
 	repositories {
 		// uncomment to publish to the local maven
 		// mavenLocal()
-
-        // This is used by me internally to publish to my maven repo at https://ytg1234.github.io/maven/
-        maven {
-            url = "file://${projectDir}/repo"
-        }
 	}
 }
