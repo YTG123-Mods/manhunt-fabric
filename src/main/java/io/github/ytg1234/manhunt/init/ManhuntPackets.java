@@ -17,15 +17,11 @@ public final class ManhuntPackets {
 
     public static void registerPacketsClient() {
         ClientSidePacketRegistry.INSTANCE.register(ManhuntPackets.SERVER_QUESTION_PACKET_ID,  (context, data) -> {
-            context.getTaskQueue().execute(() -> {
-                ClientSidePacketRegistry.INSTANCE.sendToServer(CLIENT_ANSWER_PACKET_ID, new PacketByteBuf(Unpooled.buffer()));
-            });
+            context.getTaskQueue().execute(() -> ClientSidePacketRegistry.INSTANCE.sendToServer(CLIENT_ANSWER_PACKET_ID, new PacketByteBuf(Unpooled.buffer())));
         });
     }
 
     public static void registerPacketsServer() {
-        ServerSidePacketRegistry.INSTANCE.register(CLIENT_ANSWER_PACKET_ID, (context, data) -> {
-            ManhuntUtils.haveMod.add(context.getPlayer());
-        });
+        ServerSidePacketRegistry.INSTANCE.register(CLIENT_ANSWER_PACKET_ID, (context, data) -> ManhuntUtils.haveMod.add(context.getPlayer()));
     }
 }
