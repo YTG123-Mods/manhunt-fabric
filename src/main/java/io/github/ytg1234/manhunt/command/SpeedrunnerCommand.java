@@ -15,16 +15,12 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class SpeedrunnerCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(
-                literal("speedrunner").then(
-                            literal("set").then(
-                                argument("target", EntityArgumentType.player()).executes(SpeedrunnerCommand::executeSet)
-                                           )
-                ).then(
-                        literal("get").executes(SpeedrunnerCommand::executeGet)
-                ).then(
-                        literal("clear").executes(SpeedrunnerCommand::executeClear)
-                )
+        dispatcher.register(literal("speedrunner").requires(source -> source.hasPermissionLevel(2))
+                                                  .then(literal("set").then(argument("target",
+                                                                            EntityArgumentType.player()
+                                                                            ).executes(SpeedrunnerCommand::executeSet)))
+                                                  .then(literal("get").executes(SpeedrunnerCommand::executeGet))
+                                                  .then(literal("clear").executes(SpeedrunnerCommand::executeClear))
         );
     }
 
