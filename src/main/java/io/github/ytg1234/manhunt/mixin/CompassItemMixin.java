@@ -31,7 +31,7 @@ public abstract class CompassItemMixin extends Item {
                     if (user.inventory.getStack(i) == null || ManhuntUtils.speedrunner == null) continue;
                     ItemStack stack = user.inventory.getStack(i);
                     if (stack.getItem().equals(Items.COMPASS)) {
-                        ManhuntUtils.updateCompass(stack, fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner));
+                        user.equip(i, ManhuntUtils.updateCompass(stack, fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner)));
                         //                        CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
                         //                        itemTag.putBoolean("LodestoneTracked", false);
                         //                        itemTag.putString("LodestoneDimension", fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner).getServerWorld().getRegistryKey().getValue().toString());
