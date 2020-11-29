@@ -27,21 +27,12 @@ public abstract class CompassItemMixin extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (user.isSneaking() && Manhunt.CONFIG.compassBehaviour.equals(Behaviours.Compass.USE) && ManhuntUtils.hunters.contains(user.getUuid())) {
             if (!world.isClient()) {
-                for (int i = 0; i < user.inventory.size(); i++) {
-                    if (user.inventory.getStack(i) == null || ManhuntUtils.speedrunner == null) continue;
-                    ItemStack stack = user.inventory.getStack(i);
-                    if (stack.getItem().equals(Items.COMPASS)) {
-                        user.equip(i, ManhuntUtils.updateCompass(stack, fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner)));
-                        //                        CompoundTag itemTag = stack.getTag() == null ? new CompoundTag() : stack.getTag().copy();
-                        //                        itemTag.putBoolean("LodestoneTracked", false);
-                        //                        itemTag.putString("LodestoneDimension", fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner).getServerWorld().getRegistryKey().getValue().toString());
-                        //                        CompoundTag lodestonePos = new CompoundTag();
-                        //                        lodestonePos.putInt("X", (int) fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner).getX());
-                        //                        lodestonePos.putInt("Y", (int) fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner).getY());
-                        //                        lodestonePos.putInt("Z", (int) fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner).getZ());
-                        //                        itemTag.put("LodestonePos", lodestonePos);
-                        //                        stack.setTag(itemTag);
-                    }
+                ItemStack stack = user.getStackInHand(hand);
+                if (stack == null) { // This should never execute as it happens when a player uses that stack
+                    return super.use(world, user, hand);
+                }
+                if (stack.getItem().equals(Items.COMPASS)) {
+                    user.equip(8, ManhuntUtils.updateCompass(stack, fromServer(Objects.requireNonNull(user.getServer()), ManhuntUtils.speedrunner)));
                 }
             }
             return TypedActionResult.success(user.getStackInHand(hand), world.isClient());

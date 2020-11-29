@@ -1,4 +1,4 @@
-package io.github.ytg1234.manhunt.api.event;
+package io.github.ytg1234.manhunt.api.event.callback;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;

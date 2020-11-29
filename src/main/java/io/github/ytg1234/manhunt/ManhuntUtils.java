@@ -2,7 +2,7 @@ package io.github.ytg1234.manhunt;
 
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import io.github.ytg1234.manhunt.api.event.CompassUpdateCallback;
+import io.github.ytg1234.manhunt.api.event.callback.CompassUpdateCallback;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
