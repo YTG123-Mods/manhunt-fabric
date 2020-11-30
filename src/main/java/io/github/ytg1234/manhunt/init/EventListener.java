@@ -3,6 +3,7 @@ package io.github.ytg1234.manhunt.init;
 import com.mojang.brigadier.CommandDispatcher;
 import io.github.ytg1234.manhunt.Manhunt;
 import io.github.ytg1234.manhunt.ManhuntUtils;
+import io.github.ytg1234.manhunt.api.event.callback.SpeedrunnerGlowCallback;
 import io.github.ytg1234.manhunt.command.ClearCacheCommand;
 import io.github.ytg1234.manhunt.command.HuntersCommand;
 import io.github.ytg1234.manhunt.command.SpeedrunnerCommand;
@@ -47,7 +48,8 @@ public final class EventListener {
         // If speedrunner is null, bad.
         if (fromServer(server, ManhuntUtils.speedrunner) == null) return;
         if (Manhunt.CONFIG.highlightSpeedrunner) {
-            ManhuntUtils.applyStatusEffectToPlayer(fromServer(server, ManhuntUtils.speedrunner), StatusEffects.GLOWING);
+            boolean toCancel = SpeedrunnerGlowCallback.EVENT.invoker().onSpeedrunnerGlow(fromServer(server, ManhuntUtils.speedrunner));
+            if (!toCancel) ManhuntUtils.applyStatusEffectToPlayer(fromServer(server, ManhuntUtils.speedrunner), StatusEffects.GLOWING);
         }
     }
 

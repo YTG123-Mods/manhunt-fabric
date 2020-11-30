@@ -29,6 +29,9 @@
   ],
   "depends": {
     "fabricloader": ">=0.10.0",
-    "fabric": "*"
+    "fabric": "*",
+    "manhunt-api": "*",
+    "autoconfig1u": "*",
+    "cloth-config2": "*"
   }
 }
