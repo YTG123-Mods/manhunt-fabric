@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "manhunt-api",
+  "version": "${version}",
+  "name": "Manhunt API",
+  "description": "Dream's Manhunt, built from the ground up for the Fabric Loader",
+  "authors": [
+    "YTG123"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "LGPL-3.0-or-later",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.10.0",
+    "fabric": "*",
+    "manhunt": "*"
+  },
+  "custom": {
+    "modmenu:api": true,
+    "modmenu:parent": "manhunt"
+  }
+}

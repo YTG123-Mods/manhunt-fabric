@@ -20,14 +20,14 @@ import net.minecraft.item.ItemStack;
  * </p>
  *
  * @author YTG1234
- * @since 0.6
+ * @since 1.0
  */
 @FunctionalInterface
 public interface CompassUpdateCallback {
     /**
      * Called when a hunter's compass updates.
      *
-     * @since 0.6
+     * @since 1.0
      */
     Event<CompassUpdateCallback> EVENT = EventFactory.createArrayBacked(CompassUpdateCallback.class, listeners -> (oldStack, newStack) -> {
         ItemStack currentStack = newStack.copy();
@@ -52,7 +52,7 @@ public interface CompassUpdateCallback {
      *
      * @return The new, updated compass {@link ItemStack}.
      *
-     * @since 0.6
+     * @since 1.0
      */
     ItemStack onCompassUpdate(ItemStack oldStack, ItemStack newStack);
 }

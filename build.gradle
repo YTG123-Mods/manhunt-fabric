@@ -1,14 +1,10 @@
 plugins {
-	id "fabric-loom" version "0.5-SNAPSHOT"
-	id "maven-publish"
+    id "fabric-loom" version "0.5-SNAPSHOT"
+    id "maven-publish"
 }
 
 repositories {
-	jcenter()
-	maven {
-		name = "Jitpack"
-		url = "https://jitpack.io/"
-	}
+    jcenter()
 }
 
 class Globals {
@@ -24,99 +20,116 @@ class Globals {
     static def modVer = "0.6.0"
 }
 
+
+allprojects {
+    apply plugin: "fabric-loom"
+
+    group = "io.github.ytg1234"
+
+    dependencies {
+        //to change the versions see the gradle.properties file
+        minecraft("com.mojang:minecraft:${Globals.mcVer}")
+        mappings("net.fabricmc:yarn:${Globals.yarnVer}:v2")
+        modImplementation("net.fabricmc:fabric-loader:${Globals.loaderVer}")
+
+        modImplementation("net.fabricmc.fabric-api:fabric-api:${Globals.fapiVer}")
+    }
+
+    // ensure that the encoding is set to UTF-8, no matter what the system default is
+    // this fixes some edge cases with special characters not displaying correctly
+    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    // Ensure that compiling with newer Java versions still warns/fails when using classes
+    // or methods only present in versions newer than 8, so we can safely compile with Java 11
+    // or 15
+    tasks.withType(JavaCompile).configureEach {
+        def targetVersion = 8
+        if (JavaVersion.current().isJava9Compatible()) {
+            it.options.release = targetVersion
+        } else {
+            sourceCompatibility = JavaVersion.toVersion(targetVersion)
+            targetCompatibility = JavaVersion.toVersion(targetVersion)
+        }
+    }
+
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this task, sources will not be generated.
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = "sources"
+        from(sourceSets.main.allSource)
+    }
+
+    jar {
+        from("LICENSE")
+    }
+}
+
 archivesBaseName = "manhunt"
-version = "0.6.0"
-group = "io.github.ytg1234"
+version = Globals.modVer
 
 minecraft {
 }
 
+
 dependencies {
-	//to change the versions see the gradle.properties file
-	minecraft("com.mojang:minecraft:${Globals.mcVer}")
-	mappings("net.fabricmc:yarn:${Globals.yarnVer}:v2")
-	modImplementation("net.fabricmc:fabric-loader:${Globals.loaderVer}")
+    modApi("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    include("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}")
 
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${Globals.fapiVer}")
+    modImplementation("io.github.prospector:modmenu:${Globals.modmenuVer}")
 
-	modApi("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	include("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}")
+    modApi("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    include("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}")
 
-	modImplementation("io.github.prospector:modmenu:${Globals.modmenuVer}")
+    implementation project(":manhunt-api")
 
-	modApi("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}") {
-		exclude(group: "net.fabricmc.fabric-api")
-	}
-	include("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}")
-}
-
-processResources {
-	inputs.property("version", Globals.modVer)
-
-	from(sourceSets.main.resources.srcDirs) {
-		include("fabric.mod.json")
-		expand("version": Globals.modVer)
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude("fabric.mod.json")
-	}
-}
-
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
-}
-
-// Ensure that compiling with newer Java versions still warns/fails when using classes
-// or methods only present in versions newer than 8, so we can safely compile with Java 11
-// or 15
-tasks.withType(JavaCompile).configureEach {
-    def targetVersion = 8
-    if (JavaVersion.current().isJava9Compatible()) {
-        it.options.release = targetVersion
-    } else {
-        sourceCompatibility = JavaVersion.toVersion(targetVersion)
-        targetCompatibility = JavaVersion.toVersion(targetVersion)
+    afterEvaluate {
+        include project(":manhunt-api")
     }
 }
 
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = "sources"
-	from(sourceSets.main.allSource)
+
+remapJar.dependsOn(project(":manhunt-api").tasks.remapJar)
+
+processResources {
+    inputs.property("version", Globals.modVer)
+
+    from(sourceSets.main.resources.srcDirs) {
+        include("fabric.mod.json")
+        expand("version": Globals.modVer)
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude("fabric.mod.json")
+    }
 }
 
-jar {
-	from("LICENSE")
-}
-
-// configure the maven publication
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(jar) {
-				builtBy remapJar
-			}
-			artifact("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${Globals.modVer}.jar"){
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            // add all the jars that should be included when publishing to maven
+            artifact(jar) {
+                builtBy remapJar
+            }
+            artifact("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${Globals.modVer}.jar") {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+    }
 
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
-	}
+    // select the repositories you want to publish to
+    repositories {
+        // uncomment to publish to the local maven
+        // mavenLocal()
+    }
 }
