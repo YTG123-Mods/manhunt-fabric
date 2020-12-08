@@ -1,6 +1,7 @@
 plugins {
     id "fabric-loom" version "0.5-SNAPSHOT"
     id "maven-publish"
+    id "com.modrinth.minotaur" version "1.1.0"
 }
 
 repositories {
@@ -18,6 +19,9 @@ class Globals {
     static def modmenuVer = "1.14.6+build.31"
 
     static def modVer = "0.6.0"
+
+    static def modrinthId = "z0z6kFjN"
+    static String modrinthChangelog = null
 }
 
 
@@ -97,6 +101,29 @@ dependencies {
 
 
 remapJar.dependsOn(project(":manhunt-api").tasks.remapJar)
+
+import com.modrinth.minotaur.TaskModrinthUpload
+
+task publishToMR(type: TaskModrinthUpload) {
+    token = System.getenv("MODRINTH_API_TOKEN") // Token
+    // Project Info
+    projectId = Globals.modrinthId
+    versionNumber = Globals.modVer
+    // Files
+    uploadFile = remapJar
+    addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-dev.jar")
+    addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-sources.jar")
+    // Metadata
+    addGameVersion(Globals.mcVer)
+    addLoader("fabric")
+    versionName = "[$Globals.mcVer] $archivesBaseName $Globals.modVer"
+    changelog = Globals.modrinthChangelog != null && Globals.modrinthChangelog != "" ? Globals.modrinthChangelog : ""
+
+    afterEvaluate {
+        tasks.publishToMR.dependsOn(remapJar)
+        tasks.publishToMR.dependsOn(sourcesJar)
+    }
+}
 
 processResources {
     inputs.property("version", Globals.modVer)
