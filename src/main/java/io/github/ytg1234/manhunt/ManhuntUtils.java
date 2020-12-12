@@ -74,7 +74,7 @@ public final class ManhuntUtils {
         return newCompass;
     }
 
-    public static void applyStatusEffectToPlayer(PlayerEntity player, StatusEffect effect) {
-        player.applyStatusEffect(new StatusEffectInstance(effect, 2));
+    public static boolean applyStatusEffectToPlayer(PlayerEntity player, StatusEffect effect) {
+        return player.addStatusEffect(new StatusEffectInstance(effect, 2));
     }
 }

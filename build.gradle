@@ -18,7 +18,7 @@ class Globals {
     static def clothConfigVer = "4.8.2"
     static def modmenuVer = "1.14.6+build.31"
 
-    static def modVer = "1.0.0"
+    static def modVer = "1.0.1"
 
     static def modrinthId = "z0z6kFjN"
     static String modrinthChangelog = null
