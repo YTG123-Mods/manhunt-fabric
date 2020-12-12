@@ -78,7 +78,9 @@ public final class ManhuntEventRegistration {
 
     public static void registerClientSideEvents() {
         ClientPlayNetworking.registerGlobalReceiver(ManhuntUtils.SERVER_QUESTION_PACKET_ID, (client, handler, data, sender) -> {
-            ClientPlayNetworking.send(ManhuntUtils.CLIENT_ANSWER_PACKET_ID, PacketByteBufs.empty());
+            client.execute(() -> {
+                ClientPlayNetworking.send(ManhuntUtils.CLIENT_ANSWER_PACKET_ID, PacketByteBufs.empty());
+            });
         });
     }
 }
