@@ -12,7 +12,7 @@ class Globals {
     static def mcVer = "1.16.4"
     static def yarnVer = "7"
     static def loaderVer = "0.10.8"
-    static def fapiVer = "0.28.0+1.16"
+    static def fapiVer = "0.28.1+1.16"
 
     static def autoConfigVer = "3.2.2"
     static def clothConfigVer = "4.8.2"
