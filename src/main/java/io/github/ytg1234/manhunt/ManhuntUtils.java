@@ -75,6 +75,6 @@ public final class ManhuntUtils {
     }
 
     public static boolean applyStatusEffectToPlayer(PlayerEntity player, StatusEffect effect) {
-        return player.addStatusEffect(new StatusEffectInstance(effect, 2));
+        return player.addStatusEffect(new StatusEffectInstance(effect, 2, 0, false, false));
     }
 }

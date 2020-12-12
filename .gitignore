@@ -20,6 +20,7 @@ bin/
 
 #fabric
 run/
+runServer/
 
 #stupid macOS shit
 .*_*
