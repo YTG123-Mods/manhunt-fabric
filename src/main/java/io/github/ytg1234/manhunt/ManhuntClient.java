@@ -1,6 +1,6 @@
 package io.github.ytg1234.manhunt;
 
-import io.github.ytg1234.manhunt.init.ManhuntPackets;
+import io.github.ytg1234.manhunt.init.ManhuntEventRegistration;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,6 +9,6 @@ import net.fabricmc.api.Environment;
 public class ManhuntClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        ManhuntPackets.registerPacketsClient();
+        ManhuntEventRegistration.registerClientSideEvents();
     }
 }

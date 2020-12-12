@@ -1,11 +1,10 @@
 package io.github.ytg1234.manhunt.mixin;
 
 import io.github.ytg1234.manhunt.Manhunt;
-import io.github.ytg1234.manhunt.init.ManhuntPackets;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import io.github.ytg1234.manhunt.ManhuntUtils;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.ClientConnection;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.apache.logging.log4j.Level;
@@ -16,10 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin {
-    @Inject(method = "onPlayerConnect(Lnet/minecraft/network/ClientConnection;Lnet/minecraft/server/network/ServerPlayerEntity;)V", at = @At("RETURN"), cancellable = false)
+    @Inject(method = "onPlayerConnect(Lnet/minecraft/network/ClientConnection;Lnet/minecraft/server/network/ServerPlayerEntity;)V",
+            at = @At("RETURN"))
     public void onPlayerLogin(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
-        PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
-        ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, ManhuntPackets.SERVER_QUESTION_PACKET_ID, passedData);
-        Manhunt.log(Level.DEBUG, "Asked Question");
+        ServerPlayNetworking.send(player, ManhuntUtils.SERVER_QUESTION_PACKET_ID, PacketByteBufs.empty());
+        Manhunt.log(Level.DEBUG, "Asked Server Question");
     }
 }

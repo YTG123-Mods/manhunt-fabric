@@ -11,6 +11,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ import java.util.UUID;
 public final class ManhuntUtils {
     public static UUID speedrunner;
     public static List<UUID> hunters;
+
+    public static final Identifier SERVER_QUESTION_PACKET_ID = new Identifier(Manhunt.MOD_ID, "question");
+    public static final Identifier CLIENT_ANSWER_PACKET_ID = new Identifier(Manhunt.MOD_ID, "answer");
 
     public static List<PlayerEntity> haveMod;
 

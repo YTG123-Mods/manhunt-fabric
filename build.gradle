@@ -10,15 +10,15 @@ repositories {
 
 class Globals {
     static def mcVer = "1.16.4"
-    static def yarnVer = "1.16.4+build.7"
+    static def yarnVer = "7"
     static def loaderVer = "0.10.8"
-    static def fapiVer = "0.27.1+1.16"
+    static def fapiVer = "0.28.0+1.16"
 
     static def autoConfigVer = "3.2.2"
     static def clothConfigVer = "4.8.2"
     static def modmenuVer = "1.14.6+build.31"
 
-    static def modVer = "1.0.1"
+    static def modVer = "1.0.2"
 
     static def modrinthId = "z0z6kFjN"
     static String modrinthChangelog = null
@@ -33,7 +33,7 @@ allprojects {
     dependencies {
         //to change the versions see the gradle.properties file
         minecraft("com.mojang:minecraft:${Globals.mcVer}")
-        mappings("net.fabricmc:yarn:${Globals.yarnVer}:v2")
+        mappings("net.fabricmc:yarn:${Globals.mcVer}+build.${Globals.yarnVer}:v2")
         modImplementation("net.fabricmc:fabric-loader:${Globals.loaderVer}")
 
         modImplementation("net.fabricmc.fabric-api:fabric-api:${Globals.fapiVer}")

@@ -1,13 +1,10 @@
 package io.github.ytg1234.manhunt;
 
 import io.github.ytg1234.manhunt.config.ManhuntConfig;
-import io.github.ytg1234.manhunt.init.EventListener;
-import io.github.ytg1234.manhunt.init.ManhuntPackets;
+import io.github.ytg1234.manhunt.init.ManhuntEventRegistration;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,12 +25,7 @@ public class Manhunt implements ModInitializer {
         AutoConfig.register(ManhuntConfig.class, JanksonConfigSerializer::new);
         CONFIG = AutoConfig.getConfigHolder(ManhuntConfig.class).getConfig();
 
-        ServerTickEvents.END_SERVER_TICK.register(EventListener::updateCompasses);
-        ServerTickEvents.END_SERVER_TICK.register(EventListener::highlightSpeedrunner);
-
-        CommandRegistrationCallback.EVENT.register(EventListener::registerCommands);
-
-        ManhuntPackets.registerPacketsServer();
+        ManhuntEventRegistration.registerCommonEvents();
     }
 
     /**
