@@ -86,6 +86,9 @@ dependencies {
 remapJar.dependsOn(project(":manhunt-api").tasks.remapJar)
 remapJar.dependsOn(project(":manhunt-base").tasks.remapJar)
 
+javadoc.dependsOn(project(":manhunt-api").tasks.javadoc)
+javadoc.dependsOn(project(":manhunt-base").tasks.javadoc)
+
 import com.modrinth.minotaur.TaskModrinthUpload
 
 task publishToMR(type: TaskModrinthUpload) {
