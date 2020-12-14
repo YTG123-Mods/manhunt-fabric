@@ -16,12 +16,15 @@ public interface SpeedrunnerGlowCallback {
             boolean result = listener.onSpeedrunnerGlow(speedrunner);
             if (result) return true;
         }
-       return false;
+        return false;
     });
 
     /**
+     * Receives the {@link PlayerEntity speedrunner} that is glowing and
+     * determines whether to cancel the glow.
      *
      * @param speedrunner the speedrunner that is glowing
+     *
      * @return Whether to cancel the glowing.
      */
     boolean onSpeedrunnerGlow(PlayerEntity speedrunner);

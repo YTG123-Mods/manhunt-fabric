@@ -3,6 +3,7 @@
   "id": "manhunt-api",
   "version": "${version}",
   "name": "Manhunt API",
+  "icon": "assets/manhunt/icon.png",
   "description": "Dream's Manhunt, built from the ground up for the Fabric Loader",
   "authors": [
     "YTG123"
@@ -14,7 +15,7 @@
   "depends": {
     "fabricloader": ">=0.10.0",
     "fabric": "*",
-    "manhunt": "*"
+    "minecraft": "*"
   },
   "custom": {
     "modmenu:api": true,

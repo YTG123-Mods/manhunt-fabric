@@ -1,0 +1,42 @@
+class Globals {
+    static def baseVer = "1.0.0"
+    static def autoConfigVer = "3.2.2"
+    static def clothConfigVer = "4.8.2"
+    static def modmenuVer = "1.14.6+build.31"
+}
+
+archivesBaseName = "manhunt-base"
+version = Globals.baseVer
+
+minecraft {
+}
+
+
+dependencies {
+    modApi("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    include("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}")
+
+    modImplementation("io.github.prospector:modmenu:${Globals.modmenuVer}")
+
+    modApi("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
+    include("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}")
+
+    implementation project(":manhunt-api")
+}
+
+processResources {
+    inputs.property("version", Globals.baseVer)
+
+    from(sourceSets.main.resources.srcDirs) {
+        include("fabric.mod.json")
+        expand("version": Globals.baseVer)
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude("fabric.mod.json")
+    }
+}

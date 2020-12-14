@@ -39,7 +39,7 @@ public interface CompassUpdateCallback {
     });
 
     /**
-     * Receives the old, non-updated or non-compass item stack, the hunter and the updated stack.
+     * Receives the old, non-updated or non-compass item stack and the updated stack.
      *
      * <p>
      * Can apply some changes to the old or the updated {@link ItemStack}, thus modifying the compass update process.

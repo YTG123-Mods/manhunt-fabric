@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "manhunt-base",
+  "version": "${version}",
+  "name": "Manhunt Base",
+  "icon": "assets/manhunt/icon.png",
+  "description": "Dream's Manhunt, built from the ground up for the Fabric Loader. Configure here.",
+  "authors": [
+    "YTG123"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "LGPL-3.0-or-later",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.ytg1234.manhunt.base.Manhunt"
+    ],
+    "client": [
+      "io.github.ytg1234.manhunt.base.ManhuntClient"
+    ],
+    "server": [],
+    "modmenu": [
+      "io.github.ytg1234.manhunt.base.compat.ModMenuCompat"
+    ]
+  },
+  "mixins": [
+    "manhunt-base.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.0",
+    "fabric": ">=0.28.0",
+    "manhunt-api": "*",
+    "autoconfig1u": "*",
+    "cloth-config2": "*",
+    "minecraft": "*"
+  },
+  "custom": {
+    "modmenu:parent": "manhunt"
+  }
+}

@@ -3,7 +3,7 @@
  *
  * <p>
  * Java classes inside this package contain core functionality,
- * see {@link io.github.ytg1234.manhunt.Manhunt} and {@link io.github.ytg1234.manhunt.ManhuntUtils}.
+ * see {@link io.github.ytg1234.manhunt.base.Manhunt} and {@link io.github.ytg1234.manhunt.base.ManhuntUtils}.
  * </p>
  *
  * <p>

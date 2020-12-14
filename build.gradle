@@ -14,11 +14,7 @@ class Globals {
     static def loaderVer = "0.10.8"
     static def fapiVer = "0.28.1+1.16"
 
-    static def autoConfigVer = "3.2.2"
-    static def clothConfigVer = "4.8.2"
-    static def modmenuVer = "1.14.6+build.31"
-
-    static def modVer = "1.0.2"
+    static def modVer = "2.0.0"
 
     static def modrinthId = "z0z6kFjN"
     static String modrinthChangelog = null
@@ -78,29 +74,17 @@ version = Globals.modVer
 minecraft {
 }
 
-
 dependencies {
-    modApi("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    include("me.sargunvohra.mcmods:autoconfig1u:${Globals.autoConfigVer}")
-
-    modImplementation("io.github.prospector:modmenu:${Globals.modmenuVer}")
-
-    modApi("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    include("me.shedaniel.cloth:config-2:${Globals.clothConfigVer}")
-
-    implementation project(":manhunt-api")
-
+    runtime project(":manhunt-base")
+    runtime project(":manhunt-api")
     afterEvaluate {
         include project(":manhunt-api")
+        include project(":manhunt-base")
     }
 }
 
-
 remapJar.dependsOn(project(":manhunt-api").tasks.remapJar)
+remapJar.dependsOn(project(":manhunt-base").tasks.remapJar)
 
 import com.modrinth.minotaur.TaskModrinthUpload
 

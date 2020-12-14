@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "io.github.ytg1234.manhunt.base.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "CompassItemMixin",
+    "PlayerEntityMixin",
+    "PlayerInventoryMixin",
+    "PlayerManagerMixin"
+  ],
+  "client": [
+    "HeldItemRendererMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
