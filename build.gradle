@@ -18,6 +18,7 @@ class Globals {
 
     static def modrinthId = "z0z6kFjN"
     static String modrinthChangelog = null
+    static def modrinthMcVers = ["1.16.2", "1.16.3", "1.16.4", "20w45a", "20w46a", "20w48a", "20w49a"]
 }
 
 
@@ -101,7 +102,9 @@ task publishToMR(type: TaskModrinthUpload) {
     addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-dev.jar")
     addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-sources.jar")
     // Metadata
-    addGameVersion(Globals.mcVer)
+    Globals.modrinthMcVers.forEach {
+        addGameVersion(it)
+    }
     addLoader("fabric")
     versionName = "[$Globals.mcVer] $archivesBaseName $Globals.modVer"
     changelog = Globals.modrinthChangelog != null && Globals.modrinthChangelog != "" ? Globals.modrinthChangelog : ""
