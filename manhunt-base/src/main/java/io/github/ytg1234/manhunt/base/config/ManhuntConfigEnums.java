@@ -1,14 +1,14 @@
 package io.github.ytg1234.manhunt.base.config;
 
-public final class Behaviours {
-    private Behaviours() {}
+public final class ManhuntConfigEnums {
+    private ManhuntConfigEnums() {
+    }
 
     public enum Compass {
         /*
          * Compass Updates automatically every tick
          */
-        UPDATE,
-        /*
+        UPDATE, /*
          * Hunter has to use compass to update it
          */
         USE

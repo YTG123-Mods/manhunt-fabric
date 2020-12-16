@@ -1,8 +1,7 @@
 package io.github.ytg1234.manhunt.base.mixin;
 
-import io.github.ytg1234.manhunt.base.Manhunt;
 import io.github.ytg1234.manhunt.base.ManhuntUtils;
-import io.github.ytg1234.manhunt.base.config.Behaviours;
+import io.github.ytg1234.manhunt.base.config.ManhuntConfigEnums;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -27,8 +26,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (!world.isClient()) {
             if (source.getAttacker() != null) {
-                if (source.getAttacker() instanceof PlayerEntity && ManhuntUtils.hunters.contains(source.getAttacker().getUuid()) && Manhunt.CONFIG.damageBehaviour.equals(
-                        Behaviours.Damage.DAMAGE) && !isInvulnerableTo(source)) {
+                if (source.getAttacker() instanceof PlayerEntity &&
+                    ManhuntUtils.hunters.contains(source.getAttacker().getUuid()) &&
+                    ManhuntUtils.CONFIG.damageBehaviour.equals(ManhuntConfigEnums.Damage.DAMAGE) &&
+                    !isInvulnerableTo(source)) {
                     cir.setReturnValue(super.damage(source, Float.MAX_VALUE));
                 }
             }

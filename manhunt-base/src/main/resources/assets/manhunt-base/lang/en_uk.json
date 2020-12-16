@@ -1,18 +1,20 @@
 {
   "text.autoconfig.manhunt.option.compassBehaviour": "Compass Behaviour",
   "text.autoconfig.manhunt.option.compassBehaviour.@Tooltip[0]": "Sets the behaviour of the compass mechanic, can be either UPDATE or USE.",
-  "text.autoconfig.manhunt.option.compassBehaviour.@Tooltip[1]": "UPDATE = Automatically update the compass every tick.",
+  "text.autoconfig.manhunt.option.compassBehaviour.@Tooltip[1]": "UPDATE = Automatically update the compass every tick",
   "text.autoconfig.manhunt.option.compassBehaviour.@Tooltip[2]": "USE = Use the compass to update it (like Dream's manhunt).",
-
   "text.autoconfig.manhunt.option.damageBehaviour": "Damage Behaviour",
   "text.autoconfig.manhunt.option.damageBehaviour.@Tooltip[0]": "Sets the behaviour of the damage mechanic, can be either KILL or DAMAGE.",
   "text.autoconfig.manhunt.option.damageBehaviour.@Tooltip[1]": "KILL = The speedrunner loses when they are killed (like Dream's manhunt).",
   "text.autoconfig.manhunt.option.damageBehaviour.@Tooltip[2]": "DAMAGE = The speedrunner loses when they take damage (like dream's assassin).",
-
   "text.autoconfig.manhunt.option.freeze": "Freeze hunter when looked at",
-
+  "text.autoconfig.manhunt.option.disabledDimensions": "Disabled Dimensions",
+  "text.autoconfig.manhunt.option.disabledDimensions.@Tooltip": "Dimensions the compass won't work in.",
+  "text.autoconfig.manhunt.option.highlightSpeedrunner": "Highlight Speedrunner",
+  "text.autoconfig.manhunt.option.highlightSpeedrunner.@Tooltip": "Weather to apply the glowing effect to the speedrunner, similar to Dream's Survivalist",
   "text.autoconfig.manhunt.title": "Manhunt Fabric Configuration",
-
+  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters": "Force hunters to have a compass",
+  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters.@Tooltip": "Gives a compass to hunters while being added and forces it upon them.",
   "text.manhunt.command.speedrunner.set": "Set speedrunner to %s!",
   "text.manhunt.command.hunters.clear": "Cleared hunter list!",
   "text.manhunt.command.hunters.add": "Added %s to the hunters list!",
@@ -21,11 +23,6 @@
   "text.manhunt.command.speedrunner.error.hunter": "Cannot set speedrunner to %s because they are a hunter!",
   "text.manhunt.command.hunters.error.speedrunner": "Cannot add %s as a hunter because they are the speedrunner!",
   "text.manhunt.command.hunters.error.hunter": "Cannot add %s as a hunter because they are already a hunter!",
-  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters": "Force hunters to have a compass",
-  "text.autoconfig.manhunt.option.giveCompassWhenSettingHunters.@Tooltip": "Gives a compass to hunters while being added and forces it upon them.",
-  "text.manhunt.command.speedrunner.clear": "Speedrunner Cleared!",
-  "text.autoconfig.manhunt.option.disabledDimensions": "Disabled Dimensions",
-  "text.autoconfig.manhunt.option.disabledDimensions.@Tooltip": "Dimensions the compass won't work in.",
-  "text.autoconfig.manhunt.option.highlightSpeedrunner": "Highlight Speedrunner",
-  "text.autoconfig.manhunt.option.highlightSpeedrunner.@Tooltip": "Weather to apply the glowing effect to the speedrunner, similar to Dream's Survivalist"
+  "text.manhunt.command.speedrunner.clear": "Speedrunner Cleared!"
+
 }

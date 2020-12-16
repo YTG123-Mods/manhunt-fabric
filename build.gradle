@@ -76,8 +76,8 @@ minecraft {
 }
 
 dependencies {
-    runtime project(":manhunt-base")
-    runtime project(":manhunt-api")
+    implementation project(":manhunt-base")
+    implementation project(":manhunt-api")
     afterEvaluate {
         include project(":manhunt-api")
         include project(":manhunt-base")
@@ -86,9 +86,6 @@ dependencies {
 
 remapJar.dependsOn(project(":manhunt-api").tasks.remapJar)
 remapJar.dependsOn(project(":manhunt-base").tasks.remapJar)
-
-javadoc.dependsOn(project(":manhunt-api").tasks.javadoc)
-javadoc.dependsOn(project(":manhunt-base").tasks.javadoc)
 
 import com.modrinth.minotaur.TaskModrinthUpload
 
@@ -113,6 +110,26 @@ task publishToMR(type: TaskModrinthUpload) {
         tasks.publishToMR.dependsOn(remapJar)
         tasks.publishToMR.dependsOn(sourcesJar)
     }
+}
+
+javadoc {
+    options {
+        source = "8"
+        encoding = "UTF-8"
+        charSet = "UTF-8"
+        memberLevel = JavadocMemberLevel.PRIVATE
+        links(
+                "http://maven.fabricmc.net/docs/fabric-api-${Globals.fapiVer}",
+                "http://jenkins.liteloader.com/job/Mixin/javadoc/"
+        )
+    }
+
+    allprojects.each {
+        source(it.sourceSets.main.allJava.srcDirs)
+    }
+
+    classpath = sourceSets.main.runtimeClasspath
+    failOnError = false
 }
 
 processResources {

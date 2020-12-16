@@ -1,8 +1,7 @@
 package io.github.ytg1234.manhunt.base.mixin;
 
-import io.github.ytg1234.manhunt.base.Manhunt;
 import io.github.ytg1234.manhunt.base.ManhuntUtils;
-import io.github.ytg1234.manhunt.base.config.Behaviours;
+import io.github.ytg1234.manhunt.base.config.ManhuntConfigEnums;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.CompassItem;
 import net.minecraft.item.Item;
@@ -25,7 +24,9 @@ public abstract class CompassItemMixin extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (user.isSneaking() && Manhunt.CONFIG.compassBehaviour.equals(Behaviours.Compass.USE) && ManhuntUtils.hunters.contains(user.getUuid())) {
+        if (user.isSneaking() &&
+            ManhuntUtils.CONFIG.compassBehaviour.equals(ManhuntConfigEnums.Compass.USE) &&
+            ManhuntUtils.hunters.contains(user.getUuid())) {
             if (!world.isClient()) {
                 ItemStack stack = user.getStackInHand(hand);
                 if (stack == null) { // This should never execute as it happens when a player uses that stack

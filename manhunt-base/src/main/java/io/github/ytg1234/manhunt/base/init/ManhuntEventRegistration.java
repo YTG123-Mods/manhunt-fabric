@@ -1,13 +1,12 @@
 package io.github.ytg1234.manhunt.base.init;
 
 import com.mojang.brigadier.CommandDispatcher;
-import io.github.ytg1234.manhunt.base.Manhunt;
-import io.github.ytg1234.manhunt.base.ManhuntUtils;
 import io.github.ytg1234.manhunt.api.event.callback.SpeedrunnerGlowCallback;
+import io.github.ytg1234.manhunt.base.ManhuntUtils;
 import io.github.ytg1234.manhunt.base.command.ClearCacheCommand;
 import io.github.ytg1234.manhunt.base.command.HuntersCommand;
 import io.github.ytg1234.manhunt.base.command.SpeedrunnerCommand;
-import io.github.ytg1234.manhunt.base.config.Behaviours;
+import io.github.ytg1234.manhunt.base.config.ManhuntConfigEnums;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -47,12 +46,12 @@ public final class ManhuntEventRegistration {
 
             // If the stack is empty, null or not a compass put a compass there
             if (stack == null || stack.isEmpty() || !stack.getItem().equals(Items.COMPASS)) {
-                if (Manhunt.CONFIG.giveCompassWhenSettingHunters) {
+                if (ManhuntUtils.CONFIG.giveCompassWhenSettingHunters) {
                     fromServer(server, hunterUuid).equip(8, new ItemStack(Items.COMPASS));
                     stack = fromServer(server, hunterUuid).inventory.getStack(8);
                 } else if (stack == null) return;
             }
-            if (Manhunt.CONFIG.compassBehaviour.equals(Behaviours.Compass.UPDATE)) {
+            if (ManhuntUtils.CONFIG.compassBehaviour.equals(ManhuntConfigEnums.Compass.UPDATE)) {
                 // Set compass NBT
                 if (stack.getItem().equals(Items.COMPASS)) {
                     fromServer(server, hunterUuid).equip(8, ManhuntUtils.updateCompass(stack, fromServer(server, ManhuntUtils.speedrunner)));
@@ -64,16 +63,16 @@ public final class ManhuntEventRegistration {
     private static void highlightSpeedrunner(MinecraftServer server) {
         // If speedrunner is null, bad.
         if (fromServer(server, ManhuntUtils.speedrunner) == null) return;
-        if (Manhunt.CONFIG.highlightSpeedrunner) {
+        if (ManhuntUtils.CONFIG.highlightSpeedrunner) {
             boolean toCancel = SpeedrunnerGlowCallback.EVENT.invoker().onSpeedrunnerGlow(fromServer(server, ManhuntUtils.speedrunner));
             if (!toCancel) ManhuntUtils.applyStatusEffectToPlayer(fromServer(server, ManhuntUtils.speedrunner), StatusEffects.GLOWING);
         }
     }
 
-    private static void registerCommands(CommandDispatcher<ServerCommandSource> commandDispatcher, boolean b) {
-        SpeedrunnerCommand.register(commandDispatcher);
-        HuntersCommand.register(commandDispatcher);
-        ClearCacheCommand.register(commandDispatcher);
+    private static void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, boolean b) {
+        SpeedrunnerCommand.register(dispatcher);
+        HuntersCommand.register(dispatcher);
+        ClearCacheCommand.register(dispatcher);
     }
 
     public static void registerClientSideEvents() {

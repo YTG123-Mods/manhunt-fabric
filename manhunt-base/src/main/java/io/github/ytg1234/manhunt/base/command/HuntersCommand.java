@@ -3,7 +3,6 @@ package io.github.ytg1234.manhunt.base.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import io.github.ytg1234.manhunt.base.Manhunt;
 import io.github.ytg1234.manhunt.base.ManhuntUtils;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.item.ItemStack;
@@ -72,7 +71,7 @@ public class HuntersCommand {
             }
             return 1;
         }
-        if (Manhunt.CONFIG.giveCompassWhenSettingHunters) fromCmdContext(context, target.getUuid()).equip(8, new ItemStack(Items.COMPASS, 1));
+        if (ManhuntUtils.CONFIG.giveCompassWhenSettingHunters) fromCmdContext(context, target.getUuid()).equip(8, new ItemStack(Items.COMPASS, 1));
         ManhuntUtils.hunters.add(target.getUuid());
         if (playerHasMod) {
             context.getSource().sendFeedback(new TranslatableText("text.manhunt.command.hunters.add", target.getDisplayName()), true);
