@@ -2,13 +2,13 @@ pluginManagement {
     repositories {
         jcenter()
         maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
+            name = "Fabric"
+            setUrl("https://maven.fabricmc.net/")
         }
         gradlePluginPortal()
     }
 }
 
 rootProject.name = "manhunt"
-include "manhunt-api"
-include "manhunt-base"
+include("manhunt-api")
+include("manhunt-base")
