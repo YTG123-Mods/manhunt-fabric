@@ -110,7 +110,7 @@ tasks {
             memberLevel = JavadocMemberLevel.PRIVATE
         }
 
-        allprojects.forEach { source(it.sourceSets["main"].allSource) }
+        allprojects.forEach { source(it.sourceSets["main"].allJava) }
 
         classpath = sourceSets["main"].runtimeClasspath
     }
