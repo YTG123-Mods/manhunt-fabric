@@ -1,7 +1,7 @@
 package io.github.ytg1234.manhunt.base.init
 
 import io.github.ytg1234.manhunt.base.*
-import io.github.ytg1234.manhunt.base.config.ManhuntConfigEnums
+import io.github.ytg1234.manhunt.config.Compass
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.CompassItem
 import net.minecraft.item.ItemStack
@@ -16,7 +16,7 @@ object ManhuntInteractions {
 
         // If user is not sneaking we don't need
         if (user.isSneaking &&
-            CONFIG!!.compassBehaviour == ManhuntConfigEnums.Compass.USE &&
+            CONFIG!!.compassBehaviour == Compass.USE &&
             hunters.contains(user.uuid)
         ) {
             // On the client we'll just return

@@ -1,9 +1,15 @@
 package io.github.ytg1234.manhunt.base.command
 
+import com.mojang.brigadier.Command
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
-import com.mojang.brigadier.exceptions.CommandSyntaxException
-import io.github.ytg1234.manhunt.base.*
+import io.github.ytg1234.manhunt.base.CONFIG
+import io.github.ytg1234.manhunt.base.fromCmdContext
+import io.github.ytg1234.manhunt.base.hunters
+import io.github.ytg1234.manhunt.base.playerHasMod
+import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.base.util.reset
+import mc.aegis.AegisCommandBuilder
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -11,31 +17,26 @@ import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
-import java.util.*
+import java.util.ArrayList
 
 object HuntersCommand {
-    fun register(dispatcher: CommandDispatcher<ServerCommandSource?>) {
-        dispatcher.register(CommandManager.literal("hunters").requires { source: ServerCommandSource ->
-            source.hasPermissionLevel(
-                2
-            )
-        }
-            .then(
-                CommandManager.literal("clear")
-                    .executes(::executeClear)
-            )
-            .then(
-                CommandManager.literal("add").then(
-                    CommandManager.argument(
-                        "target",
-                        EntityArgumentType.player()
-                    ).executes(::executeAdd)
-                )
-            )
-            .then(
-                CommandManager.literal("get")
-                    .executes(::executeGet)
-            )
+    fun register(dispatcher: CommandDispatcher<ServerCommandSource>) {
+        dispatcher.register(
+            AegisCommandBuilder("hunters") {
+                literal("clear") {
+                    requires { it.hasPermissionLevel(2) }
+                    executes(::executeClear)
+                }
+                literal("add") {
+                    requires { it.hasPermissionLevel(2) }
+                    custom(CommandManager.argument("target", EntityArgumentType.player())) {
+                        executes(::executeAdd)
+                    }
+                }
+                literal("get") {
+                    executes(::executeGet)
+                }
+            }.build()
         )
     }
 
@@ -47,10 +48,9 @@ object HuntersCommand {
         } else {
             context.source.sendFeedback(LiteralText("Cleared hunter list!"), false)
         }
-        return 1
+        return Command.SINGLE_SUCCESS
     }
 
-    @Throws(CommandSyntaxException::class)
     private fun executeAdd(context: CommandContext<ServerCommandSource>): Int {
         val target = EntityArgumentType.getPlayer(context, "target")
         val playerHasMod: Boolean = playerHasMod(context)
@@ -75,7 +75,7 @@ object HuntersCommand {
                             .append(LiteralText(" as a hunter because they are the speedrunner!"))
                     )
             }
-            return 1
+            return Command.SINGLE_SUCCESS
         }
 
         // Check if target is already a hunter
@@ -88,13 +88,9 @@ object HuntersCommand {
                     )
                 )
             } else {
-                context.source
-                    .sendError(
-                        LiteralText("Cannot add ").append(target.displayName)
-                            .append(LiteralText(" as a hunter because they are already a hunter!"))
-                    )
+                context.source.sendError(reset("Cannot add ") + target.displayName + " as a hunter because they are already a hunter!")
             }
-            return 1
+            return Command.SINGLE_SUCCESS
         }
         if (CONFIG!!.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid).equip(
             8,
@@ -106,13 +102,12 @@ object HuntersCommand {
         } else {
             context.source
                 .sendFeedback(
-                    LiteralText("Added ").append(target.displayName).append(LiteralText(" to the hunters list!")), true
+                    reset("Added ") + target.displayName + reset(" to the hunters list!"), true
                 )
         }
-        return 1
+        return Command.SINGLE_SUCCESS
     }
 
-    @Throws(CommandSyntaxException::class)
     private fun executeGet(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
         if (hunters.isEmpty()) return 1
@@ -132,6 +127,6 @@ object HuntersCommand {
         } else {
             context.source.sendFeedback(LiteralText("Hunters are: " + java.lang.String.join(", ", hunterNames)), false)
         }
-        return 1
+        return Command.SINGLE_SUCCESS
     }
 }

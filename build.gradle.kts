@@ -15,11 +15,12 @@ object Globals {
     const val yarnVer = "7"
     const val loaderVer = "0.10.8"
     const val fapiVer = "0.29.1+1.16"
+    const val flkVer = "1.4.21+build.1"
+    const val aegisVer = "1.0.1"
 
     const val grp = "io.github.ytg1234"
-    const val modVer = "2.0.0"
 
-    const val flkVer = "1.4.21+build.1"
+    const val modVer = "2.0.0"
 
     const val modrinthId = "z0z6kFjN"
     val modrinthMcVers = arrayOf("1.16.2", "1.16.3", "1.16.4", "20w45a", "20w46a", "20w48a", "20w49a", "20w50a", "20w51a")
@@ -28,6 +29,15 @@ object Globals {
 allprojects {
     apply(plugin = "fabric-loom")
     apply(plugin = "org.jetbrains.kotlin.jvm")
+
+    repositories {
+        maven(url = "https://jitpack.io/") {
+            name = "Jitpack"
+            content {
+                includeGroup("com.github.P03W")
+            }
+        }
+    }
 
     java {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -41,13 +51,19 @@ allprojects {
         val mappings = configurations.getByName("mappings")
         val modImplementation = configurations.getByName("modImplementation")
 
+        // Essentials
         minecraft("com.mojang", "minecraft", Globals.mcVer)
         mappings("net.fabricmc", "yarn", "${Globals.mcVer}+build.${Globals.yarnVer}", classifier = "v2")
         modImplementation("net.fabricmc", "fabric-loader", Globals.loaderVer)
 
+        // Fabric API
         modImplementation("net.fabricmc.fabric-api", "fabric-api", Globals.fapiVer)
 
+        // Kotlin
         modImplementation("net.fabricmc", "fabric-language-kotlin", Globals.flkVer)
+
+        // Commands
+        modImplementation("com.github.P03W", "Aegis", Globals.aegisVer)
     }
 
     tasks {

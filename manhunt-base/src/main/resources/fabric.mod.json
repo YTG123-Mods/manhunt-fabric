@@ -21,7 +21,7 @@
     ],
     "server": [],
     "modmenu": [
-      "io.github.ytg1234.manhunt.base.compat.ModMenuCompat"
+      "io.github.ytg1234.manhunt.compat.ModMenuCompat"
     ]
   },
   "mixins": [

@@ -1,8 +1,13 @@
 package io.github.ytg1234.manhunt.base.init
 
 import io.github.ytg1234.manhunt.api.event.callback.SpeedrunnerGlowCallback
-import io.github.ytg1234.manhunt.base.*
-import io.github.ytg1234.manhunt.base.config.ManhuntConfigEnums
+import io.github.ytg1234.manhunt.base.CONFIG
+import io.github.ytg1234.manhunt.base.applyStatusEffectToPlayer
+import io.github.ytg1234.manhunt.base.fromServer
+import io.github.ytg1234.manhunt.base.hunters
+import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.base.updateCompass
+import io.github.ytg1234.manhunt.config.Compass
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -26,7 +31,7 @@ object ManhuntTicks {
                     stack = fromServer(server, hunterUuid).inventory.getStack(8)
                 }
             }
-            if (CONFIG!!.compassBehaviour == ManhuntConfigEnums.Compass.UPDATE) {
+            if (CONFIG!!.compassBehaviour == Compass.UPDATE) {
                 // Set compass NBT
                 if (stack.item == Items.COMPASS) {
                     fromServer(server, hunterUuid).equip(

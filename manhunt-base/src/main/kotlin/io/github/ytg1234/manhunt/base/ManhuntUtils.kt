@@ -1,9 +1,8 @@
 package io.github.ytg1234.manhunt.base
 
 import com.mojang.brigadier.context.CommandContext
-import com.mojang.brigadier.exceptions.CommandSyntaxException
 import io.github.ytg1234.manhunt.api.event.callback.CompassUpdateCallback
-import io.github.ytg1234.manhunt.base.config.ManhuntConfig
+import io.github.ytg1234.manhunt.config.ManhuntConfig
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
@@ -14,21 +13,26 @@ import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
-import java.util.*
+import java.util.UUID
 
 const val MOD_ID = "manhunt"
 const val MOD_NAME = "Manhunt Fabric"
 
-@JvmField val hunters: MutableList<UUID> = mutableListOf()
-@JvmField val SERVER_QUESTION_PACKET_ID: Identifier = Identifier(MOD_ID, "question")
-@JvmField val CLIENT_ANSWER_PACKET_ID: Identifier = Identifier(MOD_ID, "answer")
-@JvmField val haveMod: MutableList<PlayerEntity> = mutableListOf()
-@JvmField val LOGGER = LogManager.getLogger(MOD_NAME)
-@JvmField val speedrunner: UUID? = null
-@JvmField var CONFIG: ManhuntConfig? = null
-@JvmField var runActive = false
+@JvmField
+val hunters: MutableList<UUID> = mutableListOf()
+@JvmField
+val SERVER_QUESTION_PACKET_ID: Identifier = Identifier(MOD_ID, "question")
+@JvmField
+val CLIENT_ANSWER_PACKET_ID: Identifier = Identifier(MOD_ID, "answer")
+@JvmField
+val haveMod: MutableList<PlayerEntity> = mutableListOf()
+@JvmField
+val LOGGER = LogManager.getLogger(MOD_NAME)
+@JvmField
+var speedrunner: UUID? = null
+@JvmField
+var CONFIG: ManhuntConfig? = null
 
-@Throws(CommandSyntaxException::class)
 fun playerHasMod(context: CommandContext<ServerCommandSource>): Boolean {
     return context.source.entity != null &&
             context.source.entity is PlayerEntity &&
