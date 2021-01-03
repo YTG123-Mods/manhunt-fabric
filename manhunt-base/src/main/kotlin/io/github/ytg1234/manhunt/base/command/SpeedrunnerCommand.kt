@@ -7,12 +7,12 @@ import io.github.ytg1234.manhunt.base.fromCmdContext
 import io.github.ytg1234.manhunt.base.hunters
 import io.github.ytg1234.manhunt.base.playerHasMod
 import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.base.util.plus
 import io.github.ytg1234.manhunt.base.util.reset
 import mc.aegis.AegisCommandBuilder
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
-import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
 
 object SpeedrunnerCommand {
@@ -67,7 +67,7 @@ object SpeedrunnerCommand {
         } else {
             context.source
                 .sendFeedback(
-                    reset("Set speedrunner to ") + target.displayName +  reset("!"),
+                    reset("Set speedrunner to ") + target.displayName + reset("!"),
                     true
                 )
         }

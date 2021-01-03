@@ -145,7 +145,7 @@ tasks {
         }
 
         allprojects.forEach {
-            source(it.sourceSets["main"].allSource)
+            source(it.sourceSets["main"].allJava)
         }
 
         classpath = sourceSets["main"].runtimeClasspath
