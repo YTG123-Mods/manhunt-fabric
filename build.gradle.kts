@@ -13,7 +13,7 @@ object Globals {
     const val mcVer = "1.16.4"
     const val yarnVer = "7"
     const val loaderVer = "0.10.8"
-    const val fapiVer = "0.29.0+1.16"
+    const val fapiVer = "0.29.1+1.16"
 
     const val grp = "io.github.ytg1234"
     const val modVer = "2.0.0"
