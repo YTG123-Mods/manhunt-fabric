@@ -9,7 +9,6 @@ plugins {
     kotlin("jvm") version "1.4.21"
 }
 
-
 object Globals {
     const val mcVer = "1.16.4"
     const val yarnVer = "7"
