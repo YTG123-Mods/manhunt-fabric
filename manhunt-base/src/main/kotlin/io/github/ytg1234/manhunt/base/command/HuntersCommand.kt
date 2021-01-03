@@ -9,6 +9,7 @@ import io.github.ytg1234.manhunt.base.hunters
 import io.github.ytg1234.manhunt.base.playerHasMod
 import io.github.ytg1234.manhunt.base.speedrunner
 import io.github.ytg1234.manhunt.base.util.reset
+import io.github.ytg1234.manhunt.base.util.plus
 import mc.aegis.AegisCommandBuilder
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.item.ItemStack
@@ -88,7 +89,7 @@ object HuntersCommand {
                     )
                 )
             } else {
-                context.source.sendError(reset("Cannot add ") + target.displayName + " as a hunter because they are already a hunter!")
+                context.source.sendError(reset("Cannot add ") + target.displayName + reset(" as a hunter because they are already a hunter!"))
             }
             return Command.SINGLE_SUCCESS
         }
