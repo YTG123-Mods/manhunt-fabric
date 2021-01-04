@@ -108,7 +108,7 @@ fun fromCmdContext(ctx: CommandContext<ServerCommandSource>, uuid: UUID?): Serve
  */
 @Contract(pure = true)
 fun fromServer(server: MinecraftServer, uuid: UUID?): ServerPlayerEntity? {
-    return if (uuid == null) null else server.playerManager.getPlayer(uuid)!!
+    return if (uuid == null) null else server.playerManager.getPlayer(uuid)
 }
 
 /**
