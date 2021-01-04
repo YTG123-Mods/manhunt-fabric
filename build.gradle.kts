@@ -1,8 +1,7 @@
-import java.io.BufferedReader
 import com.modrinth.minotaur.TaskModrinthUpload
-import java.io.InputStreamReader
 
 plugins {
+    java
     id("fabric-loom") version "0.5-SNAPSHOT"
     `maven-publish`
     id("com.modrinth.minotaur") version "1.1.0"
@@ -22,10 +21,13 @@ object Globals {
     const val modVer = "2.0.0"
 
     const val modrinthId = "z0z6kFjN"
-    val modrinthMcVers = arrayOf("1.16.2", "1.16.3", "1.16.4", "20w45a", "20w46a", "20w48a", "20w49a", "20w50a", "20w51a")
+    const val unstable = false
+    val modrinthMcVers =
+        arrayOf("1.16.2", "1.16.3", "1.16.4", "20w45a", "20w46a", "20w48a", "20w49a", "20w50a", "20w51a")
 }
 
 allprojects {
+    apply(plugin = "java")
     apply(plugin = "fabric-loom")
     apply(plugin = "org.jetbrains.kotlin.jvm")
 
@@ -46,10 +48,6 @@ allprojects {
     group = Globals.grp
 
     dependencies {
-        val minecraft = configurations.getByName("minecraft")
-        val mappings = configurations.getByName("mappings")
-        val modImplementation = configurations.getByName("modImplementation")
-
         // Essentials
         minecraft("com.mojang", "minecraft", Globals.mcVer)
         mappings("net.fabricmc", "yarn", "${Globals.mcVer}+build.${Globals.yarnVer}", classifier = "v2")
@@ -98,9 +96,6 @@ allprojects {
 version = Globals.modVer
 
 dependencies {
-    val include = configurations.getByName("include")
-    val implementation = configurations.getByName("implementation")
-
     implementation(project(":manhunt-api"))
     implementation(project(":manhunt-base"))
     afterEvaluate {
@@ -114,12 +109,13 @@ tasks.getByName("remapJar").dependsOn(project(":manhunt-base").tasks.getByName("
 
 tasks {
     register<TaskModrinthUpload>("publishModrinth") {
-        val br = BufferedReader(InputStreamReader(System.`in`))
+        println("Using token ${System.getenv("MODRINTH_API_TOKEN")}")
+        token = System.getenv("MODRINTH_API_TOKEN")
 
-        println("Access Token: ")
-        token = br.readLine()
-
+        println("ID: ${Globals.modrinthId}")
         projectId = Globals.modrinthId
+
+        println("Version: v${Globals.modVer}")
         versionNumber = "v${Globals.modVer}"
         uploadFile = project.tasks.getByName("remapJar")
         Globals.modrinthMcVers.forEach { addGameVersion(it) }
@@ -127,8 +123,7 @@ tasks {
 
         versionName = "Manhunt: Fabric v${Globals.modVer}"
 
-        println("Unstable (yes/no)? ")
-        releaseType = if(br.readLine() == "yes") "beta" else "release"
+        releaseType = if (Globals.unstable) "beta" else "release"
 
         dependsOn(project.tasks.getByName("remapJar"))
 
@@ -144,7 +139,7 @@ tasks {
         }
 
         allprojects.forEach {
-            source(it.sourceSets["main"].allJava)
+            source(it.sourceSets["main"].allSource)
         }
 
         classpath = sourceSets["main"].runtimeClasspath
