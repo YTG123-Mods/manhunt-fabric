@@ -14,8 +14,7 @@
   "environment": "*",
   "depends": {
     "manhunt-api": "*",
-    "manhunt-base": "*",
-    "fabric-language-kotlin": "*"
+    "manhunt-base": "*"
   },
   "entrypoints": {
     "modmenu": [

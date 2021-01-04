@@ -37,6 +37,7 @@ object ManhuntTicks {
     private fun updateCompasses(server: MinecraftServer) {
         hunters.forEach { hunterUuid ->
             // Continue with logic
+            if (fromServer(server, hunterUuid) == null) return@forEach
             var stack: ItemStack = fromServer(server, hunterUuid)!!.inventory.getStack(8)
 
             // If the stack is empty, null or not a compass put a compass there

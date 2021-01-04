@@ -36,7 +36,8 @@
     "manhunt-api": "*",
     "autoconfig1u": "*",
     "cloth-config2": "*",
-    "minecraft": "*"
+    "minecraft": "*",
+    "fabric-language-kotlin": "*"
   },
   "custom": {
     "modmenu:parent": "manhunt"

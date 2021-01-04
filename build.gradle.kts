@@ -19,7 +19,7 @@ object Globals {
 
     const val grp = "io.github.ytg1234"
 
-    const val modVer = "2.0.0"
+    const val modVer = "2.0.1"
 
     const val modrinthId = "z0z6kFjN"
     const val unstable = false
@@ -163,6 +163,8 @@ publishing {
     }
 
     repositories {
-        maven(url = System.getenv("MAVEN_REPO"))
+        if (System.getenv("MAVEN_REPO") != null) {
+            maven(url = System.getenv("MAVEN_REPO"))
+        }
     }
 }
