@@ -1,0 +1,11 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+io.github.ytg1234.manhunt.base
+io.github.ytg1234.manhunt.base.init
+io.github.ytg1234.manhunt.command
+io.github.ytg1234.manhunt.compat
+io.github.ytg1234.manhunt.config
+io.github.ytg1234.manhunt.mixin
+io.github.ytg1234.manhunt.util
+
