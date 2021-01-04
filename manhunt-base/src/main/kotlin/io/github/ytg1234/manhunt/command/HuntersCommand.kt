@@ -1,4 +1,4 @@
-package io.github.ytg1234.manhunt.base.command
+package io.github.ytg1234.manhunt.command
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.CommandDispatcher
@@ -8,8 +8,8 @@ import io.github.ytg1234.manhunt.base.fromCmdContext
 import io.github.ytg1234.manhunt.base.hunters
 import io.github.ytg1234.manhunt.base.playerHasMod
 import io.github.ytg1234.manhunt.base.speedrunner
-import io.github.ytg1234.manhunt.base.util.reset
-import io.github.ytg1234.manhunt.base.util.plus
+import io.github.ytg1234.manhunt.util.plus
+import io.github.ytg1234.manhunt.util.reset
 import mc.aegis.AegisCommandBuilder
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.item.ItemStack
@@ -20,6 +20,11 @@ import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
 import java.util.ArrayList
 
+/**
+ * Used to manage the [hunter list][hunters].
+ *
+ * @author YTG1234
+ */
 object HuntersCommand {
     fun register(dispatcher: CommandDispatcher<ServerCommandSource>) {
         dispatcher.register(
@@ -41,6 +46,9 @@ object HuntersCommand {
         )
     }
 
+    /**
+     * Clears the hunter list.
+     */
     private fun executeClear(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
         hunters.clear()
@@ -52,6 +60,9 @@ object HuntersCommand {
         return Command.SINGLE_SUCCESS
     }
 
+    /**
+     * Adds a hunter to the hunter list.
+     */
     private fun executeAdd(context: CommandContext<ServerCommandSource>): Int {
         val target = EntityArgumentType.getPlayer(context, "target")
         val playerHasMod: Boolean = playerHasMod(context)
@@ -109,6 +120,9 @@ object HuntersCommand {
         return Command.SINGLE_SUCCESS
     }
 
+    /**
+     * Sends the hunter list.
+     */
     private fun executeGet(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
         if (hunters.isEmpty()) return 1

@@ -1,3 +1,8 @@
+plugins {
+    id("fabric-loom")
+    java
+}
+
 object Globals {
     const val baseVer = "1.0.0"
     const val autoConfigVer = "3.2.2"

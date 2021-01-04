@@ -1,4 +1,4 @@
-package io.github.ytg1234.manhunt.base.command
+package io.github.ytg1234.manhunt.command
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.CommandDispatcher
@@ -7,14 +7,19 @@ import io.github.ytg1234.manhunt.base.fromCmdContext
 import io.github.ytg1234.manhunt.base.hunters
 import io.github.ytg1234.manhunt.base.playerHasMod
 import io.github.ytg1234.manhunt.base.speedrunner
-import io.github.ytg1234.manhunt.base.util.plus
-import io.github.ytg1234.manhunt.base.util.reset
+import io.github.ytg1234.manhunt.util.plus
+import io.github.ytg1234.manhunt.util.reset
 import mc.aegis.AegisCommandBuilder
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.TranslatableText
 
+/**
+ * Used to control the [speedrunner].
+ *
+ * @author YTG1234
+ */
 object SpeedrunnerCommand {
     fun register(dispatcher: CommandDispatcher<ServerCommandSource>) {
         dispatcher.register(
@@ -36,6 +41,9 @@ object SpeedrunnerCommand {
         )
     }
 
+    /**
+     * Changes the [speedrunner] to another player.
+     */
     private fun executeSet(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
         val target = EntityArgumentType.getPlayer(context, "target")
@@ -74,6 +82,9 @@ object SpeedrunnerCommand {
         return Command.SINGLE_SUCCESS
     }
 
+    /**
+     * Sends the [speedrunner]'s name.
+     */
     private fun executeGet(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
         if (speedrunner == null) return 1
@@ -95,6 +106,9 @@ object SpeedrunnerCommand {
         return Command.SINGLE_SUCCESS
     }
 
+    /**
+     * Sets the [speedrunner] to `null`
+     */
     private fun executeClear(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
         speedrunner = null

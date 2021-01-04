@@ -1,4 +1,4 @@
-package io.github.ytg1234.manhunt.base.command
+package io.github.ytg1234.manhunt.command
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.CommandDispatcher
@@ -9,6 +9,11 @@ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.server.command.ServerCommandSource
 
+/**
+ * Used to clear the [haveMod] list and resend the packet.
+ *
+ * @author YTG1234
+ */
 object ClearCacheCommand {
     fun register(dispatcher: CommandDispatcher<ServerCommandSource>) {
         dispatcher.register(

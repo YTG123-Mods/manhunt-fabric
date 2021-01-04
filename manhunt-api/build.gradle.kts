@@ -1,3 +1,8 @@
+plugins {
+    id("fabric-loom")
+    java
+}
+
 object Globals {
     const val apiVer = "1.0.0"
 }

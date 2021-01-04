@@ -1,6 +1,10 @@
 package io.github.ytg1234.manhunt.base.init
 
-import io.github.ytg1234.manhunt.base.*
+import io.github.ytg1234.manhunt.base.CONFIG
+import io.github.ytg1234.manhunt.base.fromServer
+import io.github.ytg1234.manhunt.base.hunters
+import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.base.updateCompass
 import io.github.ytg1234.manhunt.config.Compass
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.CompassItem
@@ -10,7 +14,21 @@ import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
 
+/**
+ * Handles Manhunt's interaction events.
+ *
+ * @author YTG1234
+ */
 object ManhuntInteractions {
+    /**
+     * Turns a hunters' compass when clicked.
+     *
+     * @param user the hunter
+     * @param world the world the user is in
+     * @param hand the hand the user used to click
+     *
+     * @see net.fabricmc.fabric.api.event.player.UseItemCallback.interact
+     */
     fun pointCompass(user: PlayerEntity, world: World, hand: Hand): TypedActionResult<ItemStack?>? {
         if (user.getStackInHand(hand).item !is CompassItem) return TypedActionResult.pass(user.getStackInHand(hand))
 

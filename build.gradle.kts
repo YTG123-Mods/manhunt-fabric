@@ -6,6 +6,7 @@ plugins {
     `maven-publish`
     id("com.modrinth.minotaur") version "1.1.0"
     kotlin("jvm") version "1.4.21"
+    id("org.jetbrains.dokka") version "1.4.20"
 }
 
 object Globals {
@@ -30,6 +31,7 @@ allprojects {
     apply(plugin = "java")
     apply(plugin = "fabric-loom")
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.jetbrains.dokka")
 
     repositories {
         maven(url = "https://jitpack.io/") {
@@ -81,7 +83,6 @@ allprojects {
             kotlinOptions.jvmTarget = "1.8"
         }
 
-
         register<Jar>("sourcesJar") {
             archiveClassifier.set("sources")
             from(sourceSets["main"].allSource)
@@ -89,6 +90,14 @@ allprojects {
 
         jar {
             from("LICENSE")
+        }
+
+        withType(org.jetbrains.dokka.gradle.DokkaTask::class).configureEach {
+            dokkaSourceSets {
+                configureEach {
+                    includes.from("Module.md")
+                }
+            }
         }
     }
 }
@@ -131,20 +140,6 @@ tasks {
         dependsOn(project.tasks.getByName("sourcesJar"))
     }
 
-    javadoc {
-        options {
-            source = "8"
-            encoding = "UTF-8"
-            memberLevel = JavadocMemberLevel.PRIVATE
-        }
-
-        allprojects.forEach {
-            source(it.sourceSets["main"].allSource)
-        }
-
-        classpath = sourceSets["main"].runtimeClasspath
-    }
-
     processResources {
         inputs.property("version", Globals.modVer)
 
@@ -167,5 +162,7 @@ publishing {
         }
     }
 
-    repositories {}
+    repositories {
+        maven(url = System.getenv("MAVEN_REPO"))
+    }
 }

@@ -1,4 +1,4 @@
-package io.github.ytg1234.manhunt.base.util
+package io.github.ytg1234.manhunt.util
 
 // Thank you gdude, now I don't have to do this!
 

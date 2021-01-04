@@ -6,10 +6,12 @@ import me.sargunvohra.mcmods.autoconfig1u.AutoConfig
 import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer
 import net.fabricmc.api.ModInitializer
 
+/**
+ * Initializes the mod.
+ *
+ * @author YTG1234
+ */
 object Manhunt : ModInitializer {
-    /**
-     * Initializes the mod.
-     */
     override fun onInitialize() {
         LOGGER.info("Initializing")
         AutoConfig.register(ManhuntConfig::class.java, ::JanksonConfigSerializer)
