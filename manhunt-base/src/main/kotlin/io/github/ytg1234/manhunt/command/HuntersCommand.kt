@@ -104,7 +104,7 @@ object HuntersCommand {
             }
             return Command.SINGLE_SUCCESS
         }
-        if (CONFIG!!.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid).equip(
+        if (CONFIG!!.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid)!!.equip(
             8,
             ItemStack(Items.COMPASS, 1)
         )
@@ -129,7 +129,7 @@ object HuntersCommand {
         val hunterNames: MutableList<String> = ArrayList()
         hunters.forEach { element ->
             hunterNames.add(
-                fromCmdContext(context, element).displayName.asString()
+                fromCmdContext(context, element)!!.displayName.asString()
             )
         }
         if (playerHasMod) {
