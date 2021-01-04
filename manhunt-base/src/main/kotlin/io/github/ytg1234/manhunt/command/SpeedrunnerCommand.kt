@@ -69,7 +69,7 @@ object SpeedrunnerCommand {
                 .sendFeedback(
                     TranslatableText(
                         "text.manhunt.command.speedrunner.set",
-                        fromCmdContext(context, speedrunner).displayName
+                        fromCmdContext(context, speedrunner)!!.displayName
                     ), true
                 )
         } else {
@@ -93,13 +93,13 @@ object SpeedrunnerCommand {
                 .sendFeedback(
                     TranslatableText(
                         "text.manhunt.command.speedrunner.get",
-                        fromCmdContext(context, speedrunner).displayName
+                        fromCmdContext(context, speedrunner)!!.displayName
                     ), false
                 )
         } else {
             context.source
                 .sendFeedback(
-                    reset("Speedrunner is currently: ") + fromCmdContext(context, speedrunner).displayName,
+                    reset("Speedrunner is currently: ") + fromCmdContext(context, speedrunner)!!.displayName,
                     true
                 )
         }
