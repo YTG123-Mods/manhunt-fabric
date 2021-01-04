@@ -15,11 +15,10 @@ object Globals {
     const val loaderVer = "0.10.8"
     const val fapiVer = "0.29.1+1.16"
     const val flkVer = "1.4.21+build.1"
-    const val aegisVer = "1.0.1"
 
     const val grp = "io.github.ytg1234"
 
-    const val modVer = "2.0.1"
+    const val modVer = "2.0.2"
 
     const val modrinthId = "z0z6kFjN"
     const val unstable = false
@@ -60,9 +59,6 @@ allprojects {
 
         // Kotlin
         modImplementation("net.fabricmc", "fabric-language-kotlin", Globals.flkVer)
-
-        // Commands
-        modImplementation("com.github.P03W", "Aegis", Globals.aegisVer)
     }
 
     tasks {
