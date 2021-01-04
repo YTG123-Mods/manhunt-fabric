@@ -2,7 +2,7 @@
 # Manhunt Fabric
 A mod which implements a lot of the mechanics found in Dream's (https://youtube.com/user/DreamTraps) Minecraft Manhunt plugin.
 
-[Javadoc](https://ytg1234.github.io/manhunt-fabric/)
+[KDoc (Javadoc in disguise)](https://ytg123-mods.github.io/manhunt-fabric/-modules.html)
 
 ***Contributions are welcome!***
 
