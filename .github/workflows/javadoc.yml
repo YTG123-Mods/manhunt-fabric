@@ -38,6 +38,7 @@ jobs:
       run: mv build/dokka/htmlMultiModule/navigation.html build/dokka/htmlMultiModule/index.html
     - name: Do KDoc stuff
       run: |
+        rm -rf ./{*,.*}
         cp -rf build/dokka/htmlMultiModule/* ./
         rm -rf build
     - name: Push and things
@@ -47,3 +48,4 @@ jobs:
         push-branch: 'gh-pages'
         commit-message: 'Publish'
         force-add: 'true'
+    - run: '!! -f'
