@@ -40,6 +40,8 @@ jobs:
       run: | 
         rm -rf ./docs
         mv build/dokka/htmlMultiModule ./docs
+        git checkout origin/gh-pages
+        git switch -c gh-pages
         git pull origin gh-pages
     - name: Push and things
       uses: github-actions-x/commit@v2.7
@@ -48,4 +50,3 @@ jobs:
         push-branch: 'gh-pages'
         commit-message: 'Publish'
         force-add: 'true'
-    - run: '!! -f'
