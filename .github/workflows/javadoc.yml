@@ -38,9 +38,10 @@ jobs:
       run: mv build/dokka/htmlMultiModule/navigation.html build/dokka/htmlMultiModule/index.html
     - name: Do KDoc stuff
       run: |
-        rm -rf ./{*,.*}
-        cp -rf build/dokka/htmlMultiModule/* ./
-        rm -rf build
+        mv build/dokka/htmlMultiModule ./docs
+        find . -not -name "docs" -delete
+        cp -rf ./docs/* ./
+        rm -rf docs
     - name: Push and things
       uses: github-actions-x/commit@v2.7
       with:
