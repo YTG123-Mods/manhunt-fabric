@@ -37,7 +37,10 @@ jobs:
     - name: Rename navigation.html
       run: mv build/dokka/htmlMultiModule/navigation.html build/dokka/htmlMultiModule/index.html
     - name: Do KDoc stuff
-      run: 'mv build/dokka/htmlMultiModule ./docs'
+      run: | 
+        rm -rf ./docs
+        mv build/dokka/htmlMultiModule ./docs
+        git pull origin gh-pages
     - name: Push and things
       uses: github-actions-x/commit@v2.7
       with:
