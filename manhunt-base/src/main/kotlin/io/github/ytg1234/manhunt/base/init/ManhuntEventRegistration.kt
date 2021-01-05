@@ -40,9 +40,9 @@ object ManhuntEventRegistration {
      * Registers Manhunt's commands.
      */
     private fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>, dedicated: Boolean) {
-        SpeedrunnerCommand.register(dispatcher)
-        HuntersCommand.register(dispatcher)
-        ClearCacheCommand.register(dispatcher)
+        SpeedrunnerCommand.registerCmd(dispatcher)
+        HuntersCommand.registerCmd(dispatcher)
+        ClearCacheCommand.registerCmd(dispatcher)
     }
 
     /**

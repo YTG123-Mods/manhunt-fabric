@@ -1,13 +1,13 @@
 package io.github.ytg1234.manhunt.command
 
 import com.mojang.brigadier.Command
-import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
 import io.github.ytg1234.manhunt.base.CONFIG
 import io.github.ytg1234.manhunt.base.fromCmdContext
 import io.github.ytg1234.manhunt.base.hunters
 import io.github.ytg1234.manhunt.base.playerHasMod
 import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.util.PermedCommand
 import io.github.ytg1234.manhunt.util.plus
 import io.github.ytg1234.manhunt.util.reset
 import mc.aegis.AegisCommandBuilder
@@ -25,25 +25,20 @@ import java.util.ArrayList
  *
  * @author YTG1234
  */
-object HuntersCommand {
-    fun register(dispatcher: CommandDispatcher<ServerCommandSource>) {
-        dispatcher.register(
-            AegisCommandBuilder("hunters") {
-                literal("clear") {
-                    requires { it.hasPermissionLevel(2) }
-                    executes(::executeClear)
-                }
-                literal("add") {
-                    requires { it.hasPermissionLevel(2) }
-                    custom(CommandManager.argument("target", EntityArgumentType.player())) {
-                        executes(::executeAdd)
-                    }
-                }
-                literal("get") {
-                    executes(::executeGet)
-                }
-            }.build()
-        )
+object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
+    override val cmd: AegisCommandBuilder.() -> AegisCommandBuilder = {
+        literal("clear") {
+            executes(::executeClear)
+        }
+        literal("add") {
+            custom(CommandManager.argument("target", EntityArgumentType.player())) {
+                executes(::executeAdd)
+            }
+        }
+        literal("get") {
+            executes(::executeGet)
+        }
+        this
     }
 
     /**

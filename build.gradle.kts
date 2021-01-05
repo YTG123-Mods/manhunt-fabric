@@ -18,7 +18,7 @@ object Globals {
 
     const val grp = "io.github.ytg1234"
 
-    const val modVer = "2.0.2"
+    const val modVer = "2.0.3"
 
     const val modrinthId = "z0z6kFjN"
     const val unstable = false

@@ -1,12 +1,12 @@
 package io.github.ytg1234.manhunt.command
 
 import com.mojang.brigadier.Command
-import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.context.CommandContext
 import io.github.ytg1234.manhunt.base.fromCmdContext
 import io.github.ytg1234.manhunt.base.hunters
 import io.github.ytg1234.manhunt.base.playerHasMod
 import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.util.PermedCommand
 import io.github.ytg1234.manhunt.util.plus
 import io.github.ytg1234.manhunt.util.reset
 import mc.aegis.AegisCommandBuilder
@@ -20,25 +20,20 @@ import net.minecraft.text.TranslatableText
  *
  * @author YTG1234
  */
-object SpeedrunnerCommand {
-    fun register(dispatcher: CommandDispatcher<ServerCommandSource>) {
-        dispatcher.register(
-            AegisCommandBuilder("speedrunner") {
-                literal("set") {
-                    requires { it.hasPermissionLevel(2) }
-                    custom(CommandManager.argument("target", EntityArgumentType.player())) {
-                        executes(::executeSet)
-                    }
-                }
-                literal("get") {
-                    executes(::executeGet)
-                }
-                literal("clear") {
-                    requires { it.hasPermissionLevel(2) }
-                    executes(::executeClear)
-                }
-            }.build()
-        )
+object SpeedrunnerCommand : PermedCommand("speedrunner", "manhunt.command.speedrunner", 2) {
+    override val cmd: AegisCommandBuilder.() -> AegisCommandBuilder = {
+        literal("set") {
+            custom(CommandManager.argument("target", EntityArgumentType.player())) {
+                executes(::executeSet)
+            }
+        }
+        literal("get") {
+            executes(::executeGet)
+        }
+        literal("clear") {
+            executes(::executeClear)
+        }
+        this
     }
 
     /**
