@@ -15,13 +15,12 @@ jobs:
       - name: Java
         uses: actions/setup-java@v1
         with:
-          version: 1.8
+          java-version: 1.8
       - name: Generate and Copy Docs
         run: |
           chmod +x ./gradlew
           ./gradlew dokkaHtmlMultiModule
           mv build/dokka/htmlMultiModule/navigation.html build/dokka/htmlMultiModule/index.html
-          mkdir docs; mkdir docs/build
           cp -r build/dokka/htmlMultiModule/* docs/build/mkdocs
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
