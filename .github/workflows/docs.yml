@@ -21,6 +21,8 @@ jobs:
           chmod +x ./gradlew
           ./gradlew dokkaHtmlMultiModule
           mv build/dokka/htmlMultiModule/navigation.html build/dokka/htmlMultiModule/index.html
+          rm -rf docs
+          mkdir docs; mkdir docs/build; mkdir docs/build/mkdocs
           cp -r build/dokka/htmlMultiModule/* docs/build/mkdocs
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
