@@ -20,7 +20,8 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew dokkaHtmlMultiModule
-          mv build/dokka/htmlMultiModule/navigation.html build/dokka/htmlMultiModule/index.html
+          mv build/dokka/htmlMultiModule/-modules.html build/dokka/htmlMultiModule/index.html
+          echo "<html><body><div class=\"sideMenuPart\" id=\"nav-submenu\"><div class=\"overview\"><a href=\"index.html\">Modules</a></div></div></body></html>" > build/dokka/htmlMultiModule/navigation.html
           rm -rf docs
           mkdir docs; mkdir docs/build; mkdir docs/build/mkdocs
           cp -r build/dokka/htmlMultiModule/* docs/build/mkdocs
