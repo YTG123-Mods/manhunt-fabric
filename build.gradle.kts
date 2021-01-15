@@ -10,10 +10,10 @@ plugins {
 }
 
 object Globals {
-    const val mcVer = "1.16.4"
-    const val yarnVer = "7"
-    const val loaderVer = "0.10.8"
-    const val fapiVer = "0.29.1+1.16"
+    const val mcVer = "1.16.5"
+    const val yarnVer = "1"
+    const val loaderVer = "0.11.0"
+    const val fapiVer = "0.29.3+1.16"
     const val flkVer = "1.4.21+build.1"
 
     const val grp = "io.github.ytg1234"
@@ -23,7 +23,7 @@ object Globals {
     const val modrinthId = "z0z6kFjN"
     const val unstable = false
     val modrinthMcVers =
-        arrayOf("1.16.4-pre1", "1.16.3", "1.16.3-rc1", "1.16.2", "1.16.4-rc1", "1.16.4-pre2", "1.16.4", "20w45a", "20w46a", "20w48a", "20w49a", "20w51a")
+        arrayOf("1.16.4-pre1", "1.16.3", "1.16.3-rc1", "1.16.2", "1.16.4-rc1", "1.16.4-pre2", "1.16.4", "20w45a", "20w46a", "20w48a", "20w49a", "20w51a", "1.16.5-rc1", "1.16.5")
 }
 
 allprojects {
