@@ -17,6 +17,7 @@ object Globals {
     const val flkVer = "1.4.21+build.1"
 
     const val grp = "io.github.ytg1234"
+	const val abn = "manhunt"
 
     const val modVer = "2.0.3"
 
@@ -114,25 +115,18 @@ tasks.getByName("remapJar").dependsOn(project(":manhunt-base").tasks.getByName("
 
 tasks {
     register<TaskModrinthUpload>("publishModrinth") {
-        println("Using token ${System.getenv("MODRINTH_API_TOKEN")}")
         token = System.getenv("MODRINTH_API_TOKEN")
-
-        println("ID: ${Globals.modrinthId}")
         projectId = Globals.modrinthId
-
-        println("Version: v${Globals.modVer}")
         versionNumber = "v${Globals.modVer}"
-        uploadFile = project.tasks.getByName("remapJar")
+        uploadFile = "${project.buildDir.absolutePath}/libs/${Globals.abn}-${Globals.modVer}.jar"
         Globals.modrinthMcVers.forEach { addGameVersion(it) }
         addLoader("fabric")
+		addFile("${project.buildDir.absolutePath}/libs/${Globals.abn}-${Globals.modVer}-dev.jar")
+        addFile("${project.buildDir.absolutePath}/libs/${Globals.abn}-${Globals.modVer}-sources.jar")
 
         versionName = "Manhunt: Fabric v${Globals.modVer}"
 
-        releaseType = if (Globals.unstable) "beta" else "release"
-
-        dependsOn(project.tasks.getByName("remapJar"))
-
-        addFile(project.tasks.getByName("sourcesJar"))
+        dependsOn(remapJar)
         dependsOn(project.tasks.getByName("sourcesJar"))
     }
 
