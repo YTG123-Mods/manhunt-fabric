@@ -155,7 +155,7 @@ publishing {
             artifact(tasks.jar) {
 				builtBy(tasks.remapJar)
             }
-            artifact("${project.buildDir.absolutePath}/libs/${Globals.abn}-${Globals.version}.jar") {
+            artifact("${project.buildDir.absolutePath}/libs/${Globals.abn}-${Globals.modVer}.jar") {
 				builtBy(tasks.remapJar)
             }
             artifact(tasks.getByName("sourcesJar")) {
