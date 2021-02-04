@@ -41,5 +41,8 @@
   },
   "custom": {
     "modmenu:parent": "manhunt"
+  },
+  "breaks": {
+	"modmenu": "<1.15.0"
   }
 }
