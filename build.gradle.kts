@@ -152,18 +152,15 @@ tasks {
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            artifact(tasks.getByName("jar")) {
-                builtBy(tasks.getByName("remapJar"))
+            artifact(tasks.jar) {
+				builtBy(tasks.remapJar)
+            }
+            artifact("${project.buildDir.absolutePath}/libs/${Globals.abn}-${Globals.version}.jar") {
+				builtBy(tasks.remapJar)
             }
             artifact(tasks.getByName("sourcesJar")) {
-                builtBy(tasks.getByName("remapSourcesJar"))
+				builtBy(tasks.remapSourcesJar)
             }
-        }
-    }
-
-    repositories {
-        if (System.getenv("MAVEN_REPO") != null) {
-            maven(url = System.getenv("MAVEN_REPO"))
         }
     }
 }
