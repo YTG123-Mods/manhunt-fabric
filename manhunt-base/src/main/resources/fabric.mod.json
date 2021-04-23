@@ -4,25 +4,32 @@
   "version": "${version}",
   "name": "Manhunt Base",
   "icon": "assets/manhunt/icon.png",
-  "description": "Dream's Manhunt, built from the ground up for the Fabric Loader. Configure here.",
+  "description": "Dream's Manhunt, built from the ground up for the Fabric Loader.",
   "authors": [
     "YTG123"
   ],
   "contributors": [],
-  "contact": {},
+  "contact": {
+    "homepage": "https://github.com/YTG123-Mods/manhunt-fabric",
+    "sources": "https://github.com/YTG123-Mods/manhunt-fabric",
+    "issues": "https://github.com/YTG123-Mods/manhunt-fabric/issues"
+  },
   "license": "LGPL-3.0-or-later",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.ytg1234.manhunt.base.Manhunt"
+      {
+        "value": "io.github.ytg1234.manhunt.base.Manhunt",
+        "adapter": "kotlin"
+      }
     ],
     "client": [
-      "io.github.ytg1234.manhunt.base.ManhuntClient"
+      {
+        "value": "io.github.ytg1234.manhunt.base.ManhuntClient",
+        "adapter": "kotlin"
+      }
     ],
-    "server": [],
-    "modmenu": [
-      "io.github.ytg1234.manhunt.base.compat.ModMenuCompat"
-    ]
+    "server": []
   },
   "mixins": [
     "manhunt-base.mixins.json"
@@ -33,9 +40,22 @@
     "manhunt-api": "*",
     "autoconfig1u": "*",
     "cloth-config2": "*",
-    "minecraft": "*"
+    "minecraft": "*",
+    "fabric-language-kotlin": "*"
+  },
+  "recommends": {
+    "modmenu": ">=1.15.0"
+  },
+  "breaks": {
+    "modmenu": "<1.15.0"
   },
   "custom": {
-    "modmenu:parent": "manhunt"
+    "modmenu": {
+      "parent": "manhunt",
+      "links": {
+        "text.manhunt.docs": "https://github.com/YTG123-Mods/manhunt-fabric/wiki",
+        "text.manhunt.javadoc": "https://ytg123-mods.github.io/manhunt-fabric/"
+      }
+    }
   }
 }

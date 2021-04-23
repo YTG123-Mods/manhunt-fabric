@@ -4,12 +4,16 @@
   "version": "${version}",
   "name": "Manhunt API",
   "icon": "assets/manhunt/icon.png",
-  "description": "Dream's Manhunt, built from the ground up for the Fabric Loader",
+  "description": "Dream's Manhunt, built from the ground up for the Fabric Loader.",
   "authors": [
     "YTG123"
   ],
   "contributors": [],
-  "contact": {},
+  "contact": {
+    "homepage": "https://github.com/YTG123-Mods/manhunt-fabric",
+    "sources": "https://github.com/YTG123-Mods/manhunt-fabric",
+    "issues": "https://github.com/YTG123-Mods/manhunt-fabric/issues"
+  },
   "license": "LGPL-3.0-or-later",
   "environment": "*",
   "depends": {
@@ -18,7 +22,13 @@
     "minecraft": "*"
   },
   "custom": {
-    "modmenu:api": true,
-    "modmenu:parent": "manhunt"
+    "modmenu": {
+      "library": true,
+      "parent": "manhunt",
+      "links": {
+        "text.manhunt.docs": "https://github.com/YTG123-Mods/manhunt-fabric/wiki",
+        "text.manhunt.javadoc": "https://ytg123-mods.github.io/manhunt-fabric/"
+      }
+    }
   }
 }

@@ -1,0 +1,32 @@
+name: Docs
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Generate and Copy Docs
+        run: |
+          chmod +x ./gradlew
+          ./gradlew dokkaHtmlMultiModule
+          mv build/dokka/htmlMultiModule/-modules.html build/dokka/htmlMultiModule/index.html
+          echo "<html><body><div class=\"sideMenuPart\" id=\"nav-submenu\"><div class=\"overview\"><a href=\"index.html\">Modules</a></div></div></body></html>" > build/dokka/htmlMultiModule/navigation.html
+          rm -rf docs
+          mkdir docs; mkdir docs/build; mkdir docs/build/mkdocs
+          cp -r build/dokka/htmlMultiModule/* docs/build/mkdocs
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+          publish_dir: docs/build/mkdocs
