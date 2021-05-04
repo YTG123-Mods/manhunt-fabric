@@ -10,11 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(PlayerInventory.class)
 public abstract class PlayerInventoryMixin {
     @Redirect(method = "dropAll()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z"))
-    private boolean preventCompass(ItemStack self) {
-        if (self.getItem().equals(Items.COMPASS)) {
-            return true;
-        } else {
-            return self.isEmpty();
-        }
+    private boolean preventCompass(ItemStack it) {
+        return it.getItem().equals(Items.COMPASS) || it.isEmpty();
     }
 }
