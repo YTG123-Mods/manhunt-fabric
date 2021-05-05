@@ -3,6 +3,10 @@ package io.github.ytg1234.manhunt.base
 import com.mojang.brigadier.context.CommandContext
 import io.github.ytg1234.manhunt.api.event.callback.CompassUpdateCallback
 import io.github.ytg1234.manhunt.config.ManhuntConfig
+import io.github.ytg1234.manhunt.util.ManhuntServer
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig
+import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer
+import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -26,12 +30,6 @@ const val MOD_ID = "manhunt"
  * The name of the mod.
  */
 const val MOD_NAME = "Manhunt Fabric"
-
-/**
- * Contains all the currently active hunters.
- */
-@JvmField
-val hunters: MutableList<UUID> = mutableListOf()
 
 /**
  * Contains the [Identifier] of the question packet.
@@ -59,16 +57,14 @@ val haveMod: MutableList<PlayerEntity> = mutableListOf()
 val LOGGER = LogManager.getLogger(MOD_NAME)!!
 
 /**
- * Contains the currently active speedrunner.
- */
-@JvmField
-var speedrunner: UUID? = null
-
-/**
  * The one and only Manhunt configuration.
  */
 @JvmField
-var CONFIG: ManhuntConfig? = null
+val CONFIG: ManhuntConfig = run {
+    LOGGER.info("Registering Manhunt Config")
+    AutoConfig.register(ManhuntConfig::class.java, ::JanksonConfigSerializer)
+    AutoConfig.getConfigHolder(ManhuntConfig::class.java).config
+}
 
 /**
  * Checks if a player has the Manhunt mod on the client side.
@@ -128,7 +124,7 @@ fun updateCompass(compass: ItemStack, target: ServerPlayerEntity?): ItemStack {
         return compass.copy()
     }
     // Is dimension disabled?
-    if (CONFIG!!.disabledDimensions.contains(target.serverWorld.registryKey.value.toString())) return compass.copy()
+    if (CONFIG.disabledDimensions.contains(target.serverWorld.registryKey.value.toString())) return compass.copy()
 
     // Continue Updating
     val oldCompass = compass.copy()
@@ -160,3 +156,14 @@ fun updateCompass(compass: ItemStack, target: ServerPlayerEntity?): ItemStack {
 fun applyStatusEffectToPlayer(player: PlayerEntity, effect: StatusEffect?): Boolean {
     return player.addStatusEffect(StatusEffectInstance(effect, 2, 0, false, false))
 }
+
+val Entity.isHunter : Boolean
+        get(){
+            return this.uuid in ((this.server ?: return false) as ManhuntServer).hunters
+        }
+
+var MinecraftServer.speedRunner : UUID?
+        get() = (this as ManhuntServer).speedRunner
+        set(value) { (this as ManhuntServer).speedRunner = value }
+val MinecraftServer.hunters : MutableList<UUID>
+        get() = (this as ManhuntServer).hunters

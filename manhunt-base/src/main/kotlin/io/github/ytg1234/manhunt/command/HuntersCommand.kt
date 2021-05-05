@@ -6,7 +6,7 @@ import io.github.ytg1234.manhunt.base.CONFIG
 import io.github.ytg1234.manhunt.base.fromCmdContext
 import io.github.ytg1234.manhunt.base.hunters
 import io.github.ytg1234.manhunt.base.playerHasMod
-import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.base.speedRunner
 import io.github.ytg1234.manhunt.util.PermedCommand
 import io.github.ytg1234.manhunt.util.plus
 import io.github.ytg1234.manhunt.util.reset
@@ -18,7 +18,6 @@ import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
-import java.util.ArrayList
 
 /**
  * Used to manage the [hunter list][hunters].
@@ -46,7 +45,7 @@ object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
      */
     private fun executeClear(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
-        hunters.clear()
+        context.source.minecraftServer.hunters.clear()
         if (playerHasMod) {
             context.source.sendFeedback(TranslatableText("text.manhunt.command.hunters.clear"), true)
         } else {
@@ -63,7 +62,8 @@ object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
         val playerHasMod: Boolean = playerHasMod(context)
 
         // Target is speedrunner
-        if (target.uuid == speedrunner) {
+        val minecraftServer = context.source.minecraftServer
+        if (target.uuid == minecraftServer.speedRunner) {
             // We check if the source is a player and the player has the mod
             if (playerHasMod) {
                 // We send error message using TranslatableText
@@ -86,7 +86,7 @@ object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
         }
 
         // Check if target is already a hunter
-        if (hunters.contains(target.uuid)) {
+        if (minecraftServer.hunters.contains(target.uuid)) {
             if (playerHasMod) {
                 context.source.sendError(
                     TranslatableText(
@@ -99,11 +99,11 @@ object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
             }
             return Command.SINGLE_SUCCESS
         }
-        if (CONFIG!!.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid)!!.equip(
+        if (CONFIG.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid)!!.equip(
             8,
             ItemStack(Items.COMPASS, 1)
         )
-        hunters.add(target.uuid)
+        minecraftServer.hunters.add(target.uuid)
         if (playerHasMod) {
             context.source.sendFeedback(TranslatableText("text.manhunt.command.hunters.add", target.displayName), true)
         } else {
@@ -120,6 +120,7 @@ object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
      */
     private fun executeGet(context: CommandContext<ServerCommandSource>): Int {
         val playerHasMod: Boolean = playerHasMod(context)
+        val hunters = context.source.minecraftServer.hunters
         if (hunters.isEmpty()) return 1
         val hunterNames: MutableList<String> = ArrayList()
         hunters.forEach { element ->
