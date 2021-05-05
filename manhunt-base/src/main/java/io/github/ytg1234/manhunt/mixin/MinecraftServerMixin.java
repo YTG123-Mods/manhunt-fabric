@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfileRepository;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import com.mojang.datafixers.DataFixer;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.resource.ServerResourceManager;
 import net.minecraft.server.MinecraftServer;
@@ -31,8 +32,10 @@ import java.util.UUID;
 class MinecraftServerMixin implements io.github.ytg1234.manhunt.util.ManhuntServer {
     @Unique @NotNull  private List<UUID> manhuntBase_hunters;
     @Unique @Nullable private UUID manhuntBase_speedRunner;
+    @Unique @NotNull  private List<PlayerEntity> manhuntBase_haveMod;
 
     @Deprecated MinecraftServerMixin() {
+        manhuntBase_haveMod = new ArrayList<>();
         manhuntBase_hunters = new ArrayList<>();    // Stupid IDEA
     }
 
@@ -54,6 +57,7 @@ class MinecraftServerMixin implements io.github.ytg1234.manhunt.util.ManhuntServ
     ) {
         //hunters = CollectionsKt.mutableListOf();
         manhuntBase_hunters = new ArrayList<>();
+        manhuntBase_haveMod = new ArrayList<>();
     }
 
     @Nullable @Override
@@ -66,9 +70,13 @@ class MinecraftServerMixin implements io.github.ytg1234.manhunt.util.ManhuntServ
         this.manhuntBase_speedRunner = speedRunner;
     }
 
-    @NotNull
-    @Override
+    @NotNull @Override
     public List<UUID> getHunters() {
         return manhuntBase_hunters;
+    }
+
+    @NotNull @Override
+    public List<PlayerEntity> getHaveMod() {
+        return manhuntBase_haveMod;
     }
 }

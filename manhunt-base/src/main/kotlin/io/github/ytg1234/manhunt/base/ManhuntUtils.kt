@@ -44,13 +44,6 @@ val SERVER_QUESTION_PACKET_ID: Identifier = Identifier(MOD_ID, "question")
 val CLIENT_ANSWER_PACKET_ID: Identifier = Identifier(MOD_ID, "answer")
 
 /**
- * Contains every [player][PlayerEntity] that has the mod
- * on their client.
- */
-@JvmField
-val haveMod: MutableList<PlayerEntity> = mutableListOf()
-
-/**
  * Manhunt's [Log4j logger][org.apache.logging.log4j.Logger]
  */
 @JvmField
@@ -75,9 +68,10 @@ val CONFIG: ManhuntConfig = run {
  */
 @Contract(pure = true)
 fun playerHasMod(context: CommandContext<ServerCommandSource>): Boolean {
-    return context.source.entity != null &&
-            context.source.entity is PlayerEntity &&
-            haveMod.contains(context.source.player)
+    val source = context.source
+    return source.entity != null &&
+            source.entity is PlayerEntity &&
+            source.player in source.minecraftServer.haveMod
 }
 
 /**
@@ -167,3 +161,5 @@ var MinecraftServer.speedRunner : UUID?
         set(value) { (this as ManhuntServer).speedRunner = value }
 val MinecraftServer.hunters : MutableList<UUID>
         get() = (this as ManhuntServer).hunters
+val MinecraftServer.haveMod : MutableList<PlayerEntity>
+        get() = (this as ManhuntServer).haveMod

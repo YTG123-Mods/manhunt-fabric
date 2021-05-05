@@ -34,7 +34,7 @@ object ManhuntEventRegistration {
         UseItemCallback.EVENT.register(ManhuntInteractions::pointCompass)
 
         ServerPlayNetworking.registerGlobalReceiver(CLIENT_ANSWER_PACKET_ID) { server, player, _, _, _ ->
-            server.execute { if (!haveMod.contains(player)) haveMod.add(player) }
+            server.execute { if (player !in server.haveMod) server.haveMod.add(player) }
         }
     }
 

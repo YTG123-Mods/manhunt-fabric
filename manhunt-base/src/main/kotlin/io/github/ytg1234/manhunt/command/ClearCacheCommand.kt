@@ -16,8 +16,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 object ClearCacheCommand : PermedCommand("clearManhuntCache", "manhunt.command.clearcache", 2) {
     override val cmd: AegisCommandBuilder.() -> AegisCommandBuilder = {
         executes { ctx ->
-            haveMod.clear()
-            ctx.source.minecraftServer.playerManager.playerList.forEach {
+            val minecraftServer = ctx.source.minecraftServer
+            minecraftServer.haveMod.clear()
+            minecraftServer.playerManager.playerList.forEach {
                 ServerPlayNetworking.send(it, SERVER_QUESTION_PACKET_ID, PacketByteBufs.empty())
             }
             Command.SINGLE_SUCCESS
