@@ -1,10 +1,10 @@
 package io.github.ytg1234.manhunt.config
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config
-import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry
-import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry.Gui.EnumHandler
-import me.sargunvohra.mcmods.autoconfig1u.shadowed.blue.endless.jankson.Comment
+import me.shedaniel.autoconfig.ConfigData
+import me.shedaniel.autoconfig.annotation.Config
+import me.shedaniel.autoconfig.annotation.ConfigEntry
+import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment
 import java.util.ArrayList
 
 /**

@@ -5,8 +5,7 @@ plugins {
 
 object Globals {
     const val baseVer = "1.1.0"
-    const val autoConfigVer = "3.2.2"
-    const val clothConfigVer = "4.8.2"
+    const val clothConfigVer = "5.0.34"
     const val modmenuVer = "1.16.5"
     const val aegisVer = "1.0.1"
 }
@@ -19,22 +18,18 @@ repositories {
     }
     
     maven(url = "https://maven.terraformersmc.com/releases")
+    maven(url = "https://maven.shedaniel.me")
 }
 
 version = Globals.baseVer
 
 dependencies {
-    modApi("me.sargunvohra.mcmods", "autoconfig1u", Globals.autoConfigVer) {
-        exclude(group = "net.fabricmc.fabric-api")
-    }
-    include("me.sargunvohra.mcmods", "autoconfig1u", Globals.autoConfigVer)
-
     modImplementation("com.terraformersmc", "modmenu", Globals.modmenuVer)
 
-    modApi("me.shedaniel.cloth", "config-2", Globals.clothConfigVer) {
+    modApi("me.shedaniel.cloth", "cloth-config-fabric", Globals.clothConfigVer) {
         exclude(group = "net.fabricmc.fabric-api")
     }
-    include("me.shedaniel.cloth", "config-2", Globals.clothConfigVer)
+    // include("me.shedaniel.cloth", "cloth-config-fabric", Globals.clothConfigVer)
 
     // Commands
     include(modApi("com.github.P03W", "Aegis", Globals.aegisVer))

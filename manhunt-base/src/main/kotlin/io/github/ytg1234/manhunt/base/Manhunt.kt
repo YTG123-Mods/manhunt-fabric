@@ -2,8 +2,8 @@ package io.github.ytg1234.manhunt.base
 
 import io.github.ytg1234.manhunt.base.init.ManhuntEventRegistration
 import io.github.ytg1234.manhunt.config.ManhuntConfig
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig
-import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer
+import me.shedaniel.autoconfig.AutoConfig
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer
 import net.fabricmc.api.ModInitializer
 
 /**

@@ -11,7 +11,7 @@ buildscript {
 
 plugins {
     java
-    id("fabric-loom") version "0.5-SNAPSHOT"
+    id("fabric-loom") version "0.9-SNAPSHOT"
     `maven-publish`
     id("com.modrinth.minotaur") version "1.1.0"
     kotlin("jvm") version "1.4.21"
@@ -105,6 +105,10 @@ allprojects {
                 }
             }
         }
+
+		processResources {
+			duplicatesStrategy = DuplicatesStrategy.WARN
+		}
     }
 }
 
@@ -143,7 +147,7 @@ tasks {
         inputs.property("version", Globals.modVer)
 
         from(sourceSets["main"].resources.srcDirs) {
-            include("fabric.mod.json")
+			include("fabric.mod.json")
             expand("version" to Globals.modVer)
         }
     }

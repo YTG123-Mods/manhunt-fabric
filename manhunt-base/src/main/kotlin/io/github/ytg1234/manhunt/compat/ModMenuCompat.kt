@@ -3,7 +3,7 @@ package io.github.ytg1234.manhunt.compat
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
 import io.github.ytg1234.manhunt.config.ManhuntConfig
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig
+import me.shedaniel.autoconfig.AutoConfig
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
 
