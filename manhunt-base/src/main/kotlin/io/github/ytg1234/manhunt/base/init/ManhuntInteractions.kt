@@ -41,7 +41,7 @@ object ManhuntInteractions {
             if (!world.isClient()) {
                 val stack = user.getStackInHand(hand)
                 if (stack.item == Items.COMPASS) {
-                    user.equip(
+                    user.inventory.setStack(
                         8,
                         updateCompass(stack, fromServer(user.server!!, speedrunner))
                     )

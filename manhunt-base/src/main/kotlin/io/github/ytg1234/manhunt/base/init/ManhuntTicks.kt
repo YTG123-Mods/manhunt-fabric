@@ -43,14 +43,14 @@ object ManhuntTicks {
             // If the stack is empty, null or not a compass put a compass there
             if (stack.isEmpty || stack.item != Items.COMPASS) {
                 if (CONFIG!!.giveCompassWhenSettingHunters) {
-                    fromServer(server, hunterUuid)!!.equip(8, ItemStack(Items.COMPASS))
+                    fromServer(server, hunterUuid)!!.inventory.setStack(8, ItemStack(Items.COMPASS))
                     stack = fromServer(server, hunterUuid)!!.inventory.getStack(8)
                 }
             }
             if (CONFIG!!.compassBehaviour == Compass.UPDATE) {
                 // Set compass NBT
                 if (stack.item == Items.COMPASS) {
-                    fromServer(server, hunterUuid)!!.equip(
+                    fromServer(server, hunterUuid)!!.inventory.setStack(
                         8,
                         updateCompass(stack, fromServer(server, speedrunner))
                     )

@@ -6,7 +6,7 @@ plugins {
 object Globals {
     const val baseVer = "1.1.0"
     const val clothConfigVer = "5.0.34"
-    const val modmenuVer = "1.16.5"
+    const val modmenuVer = "2.0.3"
     const val aegisVer = "1.0.1"
 }
 

@@ -8,7 +8,7 @@ import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.CompoundTag
+import net.minecraft.nbt.NbtCompound
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.server.network.ServerPlayerEntity
@@ -94,7 +94,7 @@ fun playerHasMod(context: CommandContext<ServerCommandSource>): Boolean {
  */
 @Contract(pure = true)
 fun fromCmdContext(ctx: CommandContext<ServerCommandSource>, uuid: UUID?): ServerPlayerEntity? {
-    return fromServer(ctx.source.minecraftServer, uuid)
+    return fromServer(ctx.source.server, uuid)
 }
 
 /**
@@ -133,15 +133,15 @@ fun updateCompass(compass: ItemStack, target: ServerPlayerEntity?): ItemStack {
     // Continue Updating
     val oldCompass = compass.copy()
     var newCompass = compass.copy()
-    val itemTag = newCompass.orCreateTag.copy()
+    val itemTag = newCompass.orCreateNbt.copy()
     itemTag.putBoolean("LodestoneTracked", false)
     itemTag.putString("LodestoneDimension", target.serverWorld.registryKey.value.toString())
-    val lodestonePos = CompoundTag()
+    val lodestonePos = NbtCompound()
     lodestonePos.putInt("X", target.x.toInt())
     lodestonePos.putInt("Y", target.y.toInt())
     lodestonePos.putInt("Z", target.z.toInt())
     itemTag.put("LodestonePos", lodestonePos)
-    newCompass.tag = itemTag
+    newCompass.nbt = itemTag
     newCompass = CompassUpdateCallback.EVENT.invoker().onCompassUpdate(oldCompass, newCompass)
     return newCompass
 }
