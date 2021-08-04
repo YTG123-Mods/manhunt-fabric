@@ -23,7 +23,8 @@ object Globals {
     const val yarnVer = "32"
     const val loaderVer = "0.11.6"
     const val fapiVer = "0.37.1+1.17"
-    const val flkVer = "1.4.21+build.1"
+    const val kotlinVer = "1.5.21"
+    const val flkVer = "1.6.3"
 
     const val grp = "io.github.ytg1234"
 	const val abn = "manhunt"
@@ -68,7 +69,7 @@ allprojects {
         modImplementation("net.fabricmc.fabric-api", "fabric-api", Globals.fapiVer)
 
         // Kotlin
-        modImplementation("net.fabricmc", "fabric-language-kotlin", Globals.flkVer)
+        modImplementation("net.fabricmc", "fabric-language-kotlin", "${Globals.flkVer}+kotlin.${Globals.kotlinVer}")
     }
 
     tasks {
