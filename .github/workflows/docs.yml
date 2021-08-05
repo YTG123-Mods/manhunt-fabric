@@ -15,7 +15,7 @@ jobs:
       - name: Java
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 16
       - name: Generate and Copy Docs
         run: |
           chmod +x ./gradlew
