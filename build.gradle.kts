@@ -2,7 +2,7 @@ import com.modrinth.minotaur.TaskModrinthUpload
 
 buildscript {
 	repositories {
-		jcenter()
+		mavenCentral()
 	}
 	dependencies {
 		classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.+")
@@ -14,16 +14,17 @@ plugins {
     id("fabric-loom") version "0.9-SNAPSHOT"
     `maven-publish`
     id("com.modrinth.minotaur") version "1.1.0"
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.5.21"
     id("org.jetbrains.dokka") version "1.4.20"
 }
 
 object Globals {
-    const val mcVer = "1.16.5"
-    const val yarnVer = "3"
-    const val loaderVer = "0.11.1"
-    const val fapiVer = "0.30.0+1.16"
-    const val flkVer = "1.4.21+build.1"
+    const val mcVer = "1.17.1"
+    const val yarnVer = "32"
+    const val loaderVer = "0.11.6"
+    const val fapiVer = "0.37.1+1.17"
+    const val kotlinVer = "1.5.21"
+    const val flkVer = "1.6.3"
 
     const val grp = "io.github.ytg1234"
 	const val abn = "manhunt"
@@ -33,7 +34,7 @@ object Globals {
     const val modrinthId = "z0z6kFjN"
     const val unstable = false
     val modrinthMcVers =
-        arrayOf("1.16.4-pre1", "1.16.3", "1.16.3-rc1", "1.16.2", "1.16.4-rc1", "1.16.4-pre2", "1.16.4", "20w45a", "20w46a", "20w48a", "20w49a", "20w51a", "1.16.5-rc1", "1.16.5")
+        arrayOf("1.17.1")
 }
 
 allprojects {
@@ -51,11 +52,6 @@ allprojects {
         }
     }
 
-    java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     group = Globals.grp
 
     dependencies {
@@ -68,25 +64,17 @@ allprojects {
         modImplementation("net.fabricmc.fabric-api", "fabric-api", Globals.fapiVer)
 
         // Kotlin
-        modImplementation("net.fabricmc", "fabric-language-kotlin", Globals.flkVer)
+        modImplementation("net.fabricmc", "fabric-language-kotlin", "${Globals.flkVer}+kotlin.${Globals.kotlinVer}")
     }
 
     tasks {
         withType<JavaCompile> {
             options.encoding = "UTF-8"
-        }
-
-        withType(JavaCompile::class).configureEach {
-            if (JavaVersion.current().isJava9Compatible) {
-                options.compilerArgs.addAll(listOf("--release", "8"))
-            } else {
-                sourceCompatibility = "8"
-                targetCompatibility = "8"
-            }
+            options.release.set(16)
         }
 
         withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-            kotlinOptions.jvmTarget = "1.8"
+            kotlinOptions.jvmTarget = "16"
         }
 
         register<Jar>("sourcesJar") {

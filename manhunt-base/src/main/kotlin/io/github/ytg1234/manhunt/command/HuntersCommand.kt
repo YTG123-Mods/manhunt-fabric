@@ -99,7 +99,7 @@ object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
             }
             return Command.SINGLE_SUCCESS
         }
-        if (CONFIG!!.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid)!!.equip(
+        if (CONFIG!!.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid)!!.inventory.setStack(
             8,
             ItemStack(Items.COMPASS, 1)
         )

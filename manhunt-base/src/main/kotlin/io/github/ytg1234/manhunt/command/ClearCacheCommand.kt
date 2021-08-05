@@ -17,7 +17,7 @@ object ClearCacheCommand : PermedCommand("clearManhuntCache", "manhunt.command.c
     override val cmd: AegisCommandBuilder.() -> AegisCommandBuilder = {
         executes { ctx ->
             haveMod.clear()
-            ctx.source.minecraftServer.playerManager.playerList.forEach {
+            ctx.source.server.playerManager.playerList.forEach {
                 ServerPlayNetworking.send(it, SERVER_QUESTION_PACKET_ID, PacketByteBufs.empty())
             }
             Command.SINGLE_SUCCESS
