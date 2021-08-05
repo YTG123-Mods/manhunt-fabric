@@ -1,0 +1,20 @@
+# The GitHub repository is a read-only mirror. PRs shall be closed.
+name: Close Pull Requests
+
+on:
+  pull_request:
+    types: opened
+    
+permissions:
+  pull-requests: write
+  issues: none
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: dessant/repo-lockdown@v2
+        with:
+          github-token: ${{ github.token }}
+          process-only: 'prs'
