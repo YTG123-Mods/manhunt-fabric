@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "${maven_group}",
+    "id": "manhunt-base",
+    "version": "${version}",
+    "entrypoints": {
+        "init": "io.github.ytg1234.manhunt.base.Manhunt",
+        "client_init":  "io.github.ytg1234.manhunt.base.ManhnutClient",
+    },
+    "metadata": {
+      "name": "Manhunt Base",
+      "description": "Dream's Manhunt, rewritten for the Quilt mod loader.",
+      "contributors": {
+        "YTG123": "Owner"
+      },
+      "license": "LGPL-3.0-or-later",
+      "icon": "assets/manhunt/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": ">=${loader_version}"
+      },
+      {
+        "id": "quilted_fabric_api",
+        "versions": "${quilted_fabric_api_version}"
+      },
+      {
+        "id": "minecraft",
+        "versions": ">=${minecraft_version}"
+      }
+    ]
+  },
+  "mixin": ["manhunt-base.mixins.json"]
+}

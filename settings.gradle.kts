@@ -1,11 +1,19 @@
 pluginManagement {
     repositories {
-        jcenter()
-        maven {
+        maven(url = "https://maven.fabricmc.net/") {
             name = "Fabric"
-            setUrl("https://maven.fabricmc.net/")
         }
+
+        maven(url = "https://maven.quiltmc.org/repository/snapshot") {
+            name = "QuiltMC Snapshot"
+        }
+
+        maven(url = "https://maven.quiltmc.org/repository/release") {
+            name = "QuiltMC Release"
+        }
+
         gradlePluginPortal()
+		mavenCentral()
     }
 }
 

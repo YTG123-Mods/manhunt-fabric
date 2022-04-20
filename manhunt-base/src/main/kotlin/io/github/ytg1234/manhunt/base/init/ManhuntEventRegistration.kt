@@ -7,13 +7,13 @@ import io.github.ytg1234.manhunt.base.haveMod
 import io.github.ytg1234.manhunt.command.ClearCacheCommand
 import io.github.ytg1234.manhunt.command.HuntersCommand
 import io.github.ytg1234.manhunt.command.SpeedrunnerCommand
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.fabric.api.event.player.UseItemCallback
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.server.command.ServerCommandSource
+import org.quiltmc.qsl.command.api.CommandRegistrationCallback
+import org.quiltmc.qsl.lifecycle.api.event.ServerTickEvents
+import org.quiltmc.qsl.networking.api.PacketByteBufs
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking
+import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking
 
 /**
  * Registers all events for Manhunt.
@@ -26,7 +26,7 @@ object ManhuntEventRegistration {
      * server and client-side.
      */
     fun registerCommonEvents() {
-        ServerTickEvents.END_SERVER_TICK.register(ManhuntTicks::centralTick)
+        ServerTickEvents.END.register(ManhuntTicks::centralTick)
 
         CommandRegistrationCallback.EVENT.register(::registerCommands)
         UseItemCallback.EVENT.register(ManhuntInteractions::pointCompass)
@@ -39,7 +39,7 @@ object ManhuntEventRegistration {
     /**
      * Registers Manhunt's commands.
      */
-    private fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>, @Suppress("UNUSED_PARAMETER") dedicated: Boolean) {
+    private fun registerCommands(dispatcher: CommandDispatcher<ServerCommandSource>, @Suppress("UNUSED_PARAMETER") integrated: Boolean, @Suppress("UNUSED_PARAMETER") dedicated: Boolean) {
         SpeedrunnerCommand.registerCmd(dispatcher)
         HuntersCommand.registerCmd(dispatcher)
         ClearCacheCommand.registerCmd(dispatcher)

@@ -2,7 +2,6 @@ package io.github.ytg1234.manhunt.base
 
 import com.mojang.brigadier.context.CommandContext
 import io.github.ytg1234.manhunt.api.event.callback.CompassUpdateCallback
-import io.github.ytg1234.manhunt.config.ManhuntConfig
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -25,7 +24,7 @@ const val MOD_ID = "manhunt"
 /**
  * The name of the mod.
  */
-const val MOD_NAME = "Manhunt Fabric"
+const val MOD_NAME = "Quilted Manhunt"
 
 /**
  * Contains all the currently active hunters.
@@ -67,8 +66,8 @@ var speedrunner: UUID? = null
 /**
  * The one and only Manhunt configuration.
  */
-@JvmField
-var CONFIG: ManhuntConfig? = null
+//@JvmField
+//var CONFIG: ManhuntConfig? = null
 
 /**
  * Checks if a player has the Manhunt mod on the client side.
@@ -128,14 +127,15 @@ fun updateCompass(compass: ItemStack, target: ServerPlayerEntity?): ItemStack {
         return compass.copy()
     }
     // Is dimension disabled?
-    if (CONFIG!!.disabledDimensions.contains(target.serverWorld.registryKey.value.toString())) return compass.copy()
+//    if (CONFIG!!.disabledDimensions.contains(target.world.registryKey.value.toString()))
+//        return compass.copy()
 
     // Continue Updating
     val oldCompass = compass.copy()
     var newCompass = compass.copy()
     val itemTag = newCompass.orCreateNbt.copy()
     itemTag.putBoolean("LodestoneTracked", false)
-    itemTag.putString("LodestoneDimension", target.serverWorld.registryKey.value.toString())
+    itemTag.putString("LodestoneDimension", target.world.registryKey.value.toString())
     val lodestonePos = NbtCompound()
     lodestonePos.putInt("X", target.x.toInt())
     lodestonePos.putInt("Y", target.y.toInt())

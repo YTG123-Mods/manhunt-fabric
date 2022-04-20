@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom")
+    id("org.quiltmc.loom")
     java
 }
 
@@ -17,36 +17,25 @@ repositories {
         }
     }
     
-    maven(url = "https://maven.terraformersmc.com/releases")
-    maven(url = "https://maven.shedaniel.me")
+    // maven(url = "https://maven.terraformersmc.com/releases")
+    // maven(url = "https://maven.shedaniel.me")
 }
 
 version = Globals.baseVer
 
 dependencies {
-    modImplementation("com.terraformersmc", "modmenu", Globals.modmenuVer)
+    // modImplementation("com.terraformersmc", "modmenu", Globals.modmenuVer)
 
-    modApi("me.shedaniel.cloth", "cloth-config-fabric", Globals.clothConfigVer) {
-        exclude(group = "net.fabricmc.fabric-api")
-    }
+    // modApi("me.shedaniel.cloth", "cloth-config-fabric", Globals.clothConfigVer) {
+    //     exclude(group = "net.fabricmc.fabric-api")
+    // }
     // include("me.shedaniel.cloth", "cloth-config-fabric", Globals.clothConfigVer)
 
     // Commands
-    include(modApi("com.github.P03W", "Aegis", Globals.aegisVer))
+    // include(modApi("com.github.P03W", "Aegis", Globals.aegisVer))
 
     // Lucko's API
     modCompileOnly("me.lucko", "fabric-permissions-api", "0.1-SNAPSHOT")
 
     implementation(project(":manhunt-api"))
-}
-
-tasks {
-    processResources {
-        inputs.property("version", Globals.baseVer)
-
-        from(sourceSets["main"].resources.srcDirs) {
-            include("fabric.mod.json")
-            expand("version" to Globals.baseVer)
-        }
-    }
 }

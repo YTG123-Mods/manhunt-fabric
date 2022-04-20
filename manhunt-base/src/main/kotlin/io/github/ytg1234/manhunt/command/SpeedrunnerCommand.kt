@@ -9,7 +9,6 @@ import io.github.ytg1234.manhunt.base.speedrunner
 import io.github.ytg1234.manhunt.util.PermedCommand
 import io.github.ytg1234.manhunt.util.plus
 import io.github.ytg1234.manhunt.util.reset
-import mc.aegis.AegisCommandBuilder
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
@@ -20,21 +19,14 @@ import net.minecraft.text.TranslatableText
  *
  * @author YTG1234
  */
-object SpeedrunnerCommand : PermedCommand("speedrunner", "manhunt.command.speedrunner", 2) {
-    override val cmd: AegisCommandBuilder.() -> AegisCommandBuilder = {
-        literal("set") {
-            custom(CommandManager.argument("target", EntityArgumentType.player())) {
-                executes(::executeSet)
-            }
-        }
-        literal("get") {
-            executes(::executeGet)
-        }
-        literal("clear") {
-            executes(::executeClear)
-        }
-        this
-    }
+object SpeedrunnerCommand : PermedCommand("manhunt.command.speedrunner", 2) {
+    override val cmd = CommandManager.literal("speedrunner").then(
+        CommandManager.literal("set").then(CommandManager.argument("target", EntityArgumentType.player()).executes(::executeSet))
+    ).then(
+        CommandManager.literal("get").executes(::executeGet)
+    ).then(
+        CommandManager.literal("clear").executes(::executeClear)
+    )
 
     /**
      * Changes the [speedrunner] to another player.

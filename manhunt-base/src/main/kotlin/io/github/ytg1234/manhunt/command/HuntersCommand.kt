@@ -2,15 +2,10 @@ package io.github.ytg1234.manhunt.command
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.context.CommandContext
-import io.github.ytg1234.manhunt.base.CONFIG
-import io.github.ytg1234.manhunt.base.fromCmdContext
-import io.github.ytg1234.manhunt.base.hunters
-import io.github.ytg1234.manhunt.base.playerHasMod
-import io.github.ytg1234.manhunt.base.speedrunner
+import io.github.ytg1234.manhunt.base.*
 import io.github.ytg1234.manhunt.util.PermedCommand
 import io.github.ytg1234.manhunt.util.plus
 import io.github.ytg1234.manhunt.util.reset
-import mc.aegis.AegisCommandBuilder
 import net.minecraft.command.argument.EntityArgumentType
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
@@ -18,28 +13,22 @@ import net.minecraft.server.command.CommandManager
 import net.minecraft.server.command.ServerCommandSource
 import net.minecraft.text.LiteralText
 import net.minecraft.text.TranslatableText
-import java.util.ArrayList
 
 /**
  * Used to manage the [hunter list][hunters].
  *
  * @author YTG1234
  */
-object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
-    override val cmd: AegisCommandBuilder.() -> AegisCommandBuilder = {
-        literal("clear") {
-            executes(::executeClear)
-        }
-        literal("add") {
-            custom(CommandManager.argument("target", EntityArgumentType.player())) {
-                executes(::executeAdd)
-            }
-        }
-        literal("get") {
-            executes(::executeGet)
-        }
-        this
-    }
+object HuntersCommand : PermedCommand("manhunt.command.hunters", 2) {
+    override val cmd = CommandManager.literal("hunters").then(
+        CommandManager.literal("clear").executes(::executeClear)
+    ).then(
+        CommandManager.literal("add").then(
+            CommandManager.argument("target", EntityArgumentType.player()).executes(::executeAdd)
+        )
+    ).then(
+        CommandManager.literal("get").executes(::executeGet)
+    )
 
     /**
      * Clears the hunter list.
@@ -99,7 +88,8 @@ object HuntersCommand : PermedCommand("hunters", "manhunt.command.hunters", 2) {
             }
             return Command.SINGLE_SUCCESS
         }
-        if (CONFIG!!.giveCompassWhenSettingHunters) fromCmdContext(context, target.uuid)!!.inventory.setStack(
+        // if (CONFIG!!.giveCompassWhenSettingHunters)
+            fromCmdContext(context, target.uuid)!!.inventory.setStack(
             8,
             ItemStack(Items.COMPASS, 1)
         )

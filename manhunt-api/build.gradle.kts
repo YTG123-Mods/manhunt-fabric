@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom")
+    id("org.quiltmc.loom")
     java
 }
 
@@ -9,13 +9,6 @@ object Globals {
 
 version = Globals.apiVer
 
-tasks {
-    processResources {
-        inputs.property("version", Globals.apiVer)
-
-        from(sourceSets["main"].resources.srcDirs) {
-            include("fabric.mod.json")
-            expand("version" to Globals.apiVer)
-        }
-    }
+java {
+	withJavadocJar()
 }

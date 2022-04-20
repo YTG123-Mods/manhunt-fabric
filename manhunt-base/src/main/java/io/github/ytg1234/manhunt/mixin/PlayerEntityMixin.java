@@ -8,7 +8,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
-import io.github.ytg1234.manhunt.config.Damage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -29,10 +28,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (!world.isClient()) {
             if (source.getAttacker() != null) {
                 if (source.getAttacker() instanceof PlayerEntity && ManhuntUtilsKt.hunters.contains(source.getAttacker().getUuid())) {
-                    assert ManhuntUtilsKt.CONFIG != null;
-                    if (ManhuntUtilsKt.CONFIG.damageBehaviour.equals(Damage.DAMAGE) && !isInvulnerableTo(source)) {
-                        cir.setReturnValue(super.damage(source, Float.MAX_VALUE));
-                    }
+//                    assert ManhuntUtilsKt.CONFIG != null;
+//                    if (ManhuntUtilsKt.CONFIG.damageBehaviour.equals(Damage.DAMAGE) && !isInvulnerableTo(source)) {
+//                        cir.setReturnValue(super.damage(source, Float.MAX_VALUE));
+//                    }
                 }
             }
         }

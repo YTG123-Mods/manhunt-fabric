@@ -1,10 +1,8 @@
 package io.github.ytg1234.manhunt.base
 
 import io.github.ytg1234.manhunt.base.init.ManhuntEventRegistration
-import io.github.ytg1234.manhunt.config.ManhuntConfig
-import me.shedaniel.autoconfig.AutoConfig
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer
-import net.fabricmc.api.ModInitializer
+import org.quiltmc.loader.api.ModContainer
+import org.quiltmc.qsl.base.api.entrypoint.ModInitializer
 
 /**
  * Initializes the mod.
@@ -12,10 +10,8 @@ import net.fabricmc.api.ModInitializer
  * @author YTG1234
  */
 object Manhunt : ModInitializer {
-    override fun onInitialize() {
+    override fun onInitialize(mod: ModContainer?) {
         LOGGER.info("Initializing")
-        AutoConfig.register(ManhuntConfig::class.java, ::JanksonConfigSerializer)
-        CONFIG = AutoConfig.getConfigHolder(ManhuntConfig::class.java).config
         ManhuntEventRegistration.registerCommonEvents()
     }
 }
